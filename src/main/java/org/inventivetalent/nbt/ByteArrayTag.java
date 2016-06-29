@@ -1,5 +1,6 @@
 package org.inventivetalent.nbt;
 
+import com.google.common.primitives.Bytes;
 import com.google.gson.JsonArray;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,11 +9,12 @@ import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class ByteArrayTag extends NBTTag<byte[]> {
+public class ByteArrayTag extends NBTTag<byte[]> implements Iterable<Byte> {
 
 	private final byte[] value;
 
@@ -49,5 +51,10 @@ public class ByteArrayTag extends NBTTag<byte[]> {
 	@Override
 	public String getTypeName() {
 		return "TAG_Byte_Array";
+	}
+
+	@Override
+	public Iterator<Byte> iterator() {
+		return Bytes.asList(value).iterator();
 	}
 }
