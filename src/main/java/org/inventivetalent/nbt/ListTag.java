@@ -9,12 +9,13 @@ import org.inventivetalent.nbt.stream.NBTOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class ListTag extends NBTTag<List<NBTTag>> {
+public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 
 	private final int          tagType;
 	private final List<NBTTag> value;
@@ -76,5 +77,10 @@ public class ListTag extends NBTTag<List<NBTTag>> {
 	@Override
 	public String getTypeName() {
 		return "TAG_List";
+	}
+
+	@Override
+	public Iterator<NBTTag> iterator() {
+		return value.iterator();
 	}
 }

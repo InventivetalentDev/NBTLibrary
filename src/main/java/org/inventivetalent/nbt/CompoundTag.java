@@ -9,12 +9,13 @@ import org.inventivetalent.nbt.stream.NBTOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class CompoundTag extends NBTTag<Map<String, NBTTag>> {
+public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable<Map.Entry<String, NBTTag>> {
 
 	private final Map<String, NBTTag> value;
 
@@ -101,5 +102,10 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> {
 	@Override
 	public String getTypeName() {
 		return "TAG_Compund";
+	}
+
+	@Override
+	public Iterator<Map.Entry<String, NBTTag>> iterator() {
+		return value.entrySet().iterator();
 	}
 }
