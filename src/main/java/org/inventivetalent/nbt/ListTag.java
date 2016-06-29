@@ -34,6 +34,10 @@ public class ListTag extends NBTTag<List<NBTTag>> {
 		return value;
 	}
 
+	public NBTTag get(int index) {
+		return value.get(index);
+	}
+
 	@Override
 	public JsonArray asJson() {
 		JsonArray jsonArray = new JsonArray();

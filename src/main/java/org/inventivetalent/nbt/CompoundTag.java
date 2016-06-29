@@ -28,6 +28,10 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> {
 		return value;
 	}
 
+	public NBTTag get(String name) {
+		return value.get(name);
+	}
+
 	@Override
 	public JsonObject asJson() {
 		JsonObject jsonObject = new JsonObject();
