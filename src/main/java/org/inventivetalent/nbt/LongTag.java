@@ -22,7 +22,7 @@ public class LongTag extends NumberTag<Long> {
 
 	public LongTag(long value) {
 		super("");
-		this.value=value;
+		this.value = value;
 	}
 
 	public LongTag(String name, long value) {

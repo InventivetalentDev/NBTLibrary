@@ -22,7 +22,7 @@ public class IntTag extends NumberTag<Integer> {
 
 	public IntTag(int value) {
 		super("");
-		this.value=value;
+		this.value = value;
 	}
 
 	public IntTag(String name, int value) {
@@ -34,6 +34,7 @@ public class IntTag extends NumberTag<Integer> {
 	public Integer getValue() {
 		return value;
 	}
+
 	@Override
 	public JsonPrimitive asJson() {
 		return new JsonPrimitive(value);

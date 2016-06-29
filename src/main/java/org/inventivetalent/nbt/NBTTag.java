@@ -21,41 +21,6 @@ public abstract class NBTTag<V> {
 
 	private final String name;
 
-	public abstract V getValue();
-
-	public abstract JsonElement asJson();
-
-	public abstract int getTypeId();
-
-	public abstract String getTypeName();
-
-	public void write(NBTOutputStream nbtOut, DataOutputStream out) throws IOException {
-	}
-
-	public String getNMSClass() {
-		return "NBTBase";
-	}
-
-	public NBTTag fromNMS(Object nms) throws ReflectiveOperationException {
-		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
-		Field field = clazz.getDeclaredField("data");
-		field.setAccessible(true);
-		return (NBTTag) getClass().getConstructors()[0].newInstance("", field.get(nms));
-	}
-
-	public Object toNMS() throws ReflectiveOperationException {
-		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
-		Constructor constructor=null;
-		for (Constructor constr : clazz.getConstructors()) {
-			if (constr.getParameterTypes().length == 1) {
-				constructor=constr;
-				break;
-			}
-		}
-		if (constructor == null) { return null; }
-		return constructor.newInstance(getValue());
-	}
-
 	public static Class<? extends NBTTag> forType(int type) {
 		switch (type) {
 			case TAG_BYTE_ARRAY:
@@ -85,6 +50,41 @@ public abstract class NBTTag<V> {
 			default:
 				throw new IllegalArgumentException("Invalid NBTTag type " + type);
 		}
+	}
+
+	public abstract V getValue();
+
+	public abstract JsonElement asJson();
+
+	public abstract int getTypeId();
+
+	public abstract String getTypeName();
+
+	public void write(NBTOutputStream nbtOut, DataOutputStream out) throws IOException {
+	}
+
+	public String getNMSClass() {
+		return "NBTBase";
+	}
+
+	public NBTTag fromNMS(Object nms) throws ReflectiveOperationException {
+		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
+		Field field = clazz.getDeclaredField("data");
+		field.setAccessible(true);
+		return (NBTTag) getClass().getConstructors()[0].newInstance("", field.get(nms));
+	}
+
+	public Object toNMS() throws ReflectiveOperationException {
+		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
+		Constructor constructor = null;
+		for (Constructor constr : clazz.getConstructors()) {
+			if (constr.getParameterTypes().length == 1) {
+				constructor = constr;
+				break;
+			}
+		}
+		if (constructor == null) { return null; }
+		return constructor.newInstance(getValue());
 	}
 
 }
