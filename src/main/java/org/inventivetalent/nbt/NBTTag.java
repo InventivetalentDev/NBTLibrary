@@ -4,15 +4,19 @@ import com.google.gson.JsonElement;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
+import org.inventivetalent.reflection.resolver.minecraft.NMSClassResolver;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 
 import static org.inventivetalent.nbt.TagID.*;
 
 @Data
 @RequiredArgsConstructor
 public abstract class NBTTag<V> {
+
+	static final NMSClassResolver NMS_CLASS_RESOLVER = new NMSClassResolver();
 
 	private final String name;
 
@@ -25,6 +29,22 @@ public abstract class NBTTag<V> {
 	public abstract String getTypeName();
 
 	public void write(NBTOutputStream nbtOut, DataOutputStream out) throws IOException {
+	}
+
+	public String getNMSClass() {
+		return "NBTBase";
+	}
+
+	public NBTTag fromNMS(Object nms) throws ReflectiveOperationException {
+		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
+		Field field = clazz.getDeclaredField("data");
+		field.setAccessible(true);
+		return (NBTTag) getClass().getConstructors()[0].newInstance("", field.get(nms));
+	}
+
+	public Object toNMS() throws ReflectiveOperationException {
+		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
+		return clazz.getConstructors()[0].newInstance(getValue());
 	}
 
 	public static Class<? extends NBTTag> forType(int type) {

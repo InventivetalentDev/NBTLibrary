@@ -45,4 +45,9 @@ public class ByteTag extends NBTTag<Byte> {
 	public String getTypeName() {
 		return "TAG_Byte";
 	}
+
+	@Override
+	public String getNMSClass() {
+		return "NBTTagByte";
+	}
 }

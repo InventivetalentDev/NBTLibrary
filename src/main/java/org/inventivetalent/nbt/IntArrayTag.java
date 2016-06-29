@@ -59,4 +59,9 @@ public class IntArrayTag extends NBTTag<int[]> implements Iterable<Integer> {
 	public Iterator<Integer> iterator() {
 		return Ints.asList(value).iterator();
 	}
+
+	@Override
+	public String getNMSClass() {
+		return "NBTTagIntArray";
+	}
 }

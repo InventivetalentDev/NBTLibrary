@@ -23,6 +23,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.inventivetalent</groupId>
+            <artifactId>reflectionhelper</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.16.8</version>

@@ -8,6 +8,7 @@ import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -107,5 +108,37 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 	@Override
 	public Iterator<Map.Entry<String, NBTTag>> iterator() {
 		return value.entrySet().iterator();
+	}
+
+	public String getNMSClass() {
+		return "NBTTagCompound";
+	}
+
+	@Override
+	public CompoundTag fromNMS(Object nms) throws ReflectiveOperationException {
+		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
+		Class<?> nbtBaseClass = NMS_CLASS_RESOLVER.resolve("NBTBase");
+		Field field = clazz.getDeclaredField("map");
+		field.setAccessible(true);
+		Map<String, Object> nmsMap = (Map<String, Object>) field.get(nms);
+		Map<String, NBTTag> map = new HashMap<>();
+		for (Map.Entry<String, Object> nmsEntry : nmsMap.entrySet()) {
+			byte typeId = (byte) nbtBaseClass.getMethod("getTypeId").invoke(nmsEntry.getValue());
+			map.put(nmsEntry.getKey(), NBTTag.forType(typeId).newInstance().fromNMS(nmsEntry.getValue()));
+		}
+		return new CompoundTag("", map);
+	}
+
+	@Override
+	public Object toNMS() throws ReflectiveOperationException {
+		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
+		Field field = clazz.getDeclaredField("map");
+		field.setAccessible(true);
+		Object nms = clazz.newInstance();
+		Map map = (Map) field.get(nms);
+		for (Map.Entry<String, NBTTag> entry : this) {
+			map.put(entry.getKey(), entry.getValue().toNMS());
+		}
+		return nms;
 	}
 }
