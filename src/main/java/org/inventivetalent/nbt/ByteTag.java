@@ -12,7 +12,7 @@ import java.io.IOException;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class ByteTag extends NBTTag<Byte> {
+public class ByteTag extends NumberTag<Byte> {
 
 	private final byte value;
 

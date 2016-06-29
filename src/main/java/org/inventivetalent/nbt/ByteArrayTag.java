@@ -14,7 +14,7 @@ import java.util.Iterator;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class ByteArrayTag extends NBTTag<byte[]> implements Iterable<Byte> {
+public class ByteArrayTag extends ArrayTag<byte[], Byte> {
 
 	private final byte[] value;
 

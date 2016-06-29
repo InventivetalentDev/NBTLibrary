@@ -23,8 +23,8 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 
 	public ListTag(int tagType, List<NBTTag> value) {
 		super("");
-		this.tagType=tagType;
-		this.value=value;
+		this.tagType = tagType;
+		this.value = value;
 	}
 
 	public ListTag(String name, int tagType, List<NBTTag> value) {
@@ -46,16 +46,18 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 		return value.get(index);
 	}
 
-	// TODO: validate tag type
 	public void add(NBTTag tag) {
+		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type"); }
 		value.add(tag);
 	}
 
 	public void add(int index, NBTTag tag) {
+		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type"); }
 		value.add(index, tag);
 	}
 
 	public void set(int index, NBTTag tag) {
+		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type"); }
 		value.set(index, tag);
 	}
 

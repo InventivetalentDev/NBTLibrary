@@ -12,7 +12,7 @@ import java.io.IOException;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class LongTag extends NBTTag<Long> {
+public class LongTag extends NumberTag<Long> {
 
 	private final long value;
 
