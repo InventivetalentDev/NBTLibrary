@@ -16,6 +16,15 @@ public class LongTag extends NBTTag<Long> {
 
 	private final long value;
 
+	public LongTag() {
+		this(0);
+	}
+
+	public LongTag(long value) {
+		super("");
+		this.value=value;
+	}
+
 	public LongTag(String name, long value) {
 		super(name);
 		this.value = value;

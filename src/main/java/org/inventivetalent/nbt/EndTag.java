@@ -15,12 +15,12 @@ import java.io.IOException;
 @ToString(callSuper = true)
 public class EndTag extends NBTTag<Void> {
 
-	public EndTag(String name) {
-		super(name);
-	}
-
 	public EndTag() {
 		this("");
+	}
+
+	public EndTag(String name) {
+		super(name);
 	}
 
 	@Override

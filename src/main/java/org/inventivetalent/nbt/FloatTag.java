@@ -16,6 +16,15 @@ public class FloatTag extends NBTTag<Float> {
 
 	private final float value;
 
+	public FloatTag() {
+		this(0);
+	}
+
+	public FloatTag(float value) {
+		super("");
+		this.value = value;
+	}
+
 	public FloatTag(String name, float value) {
 		super(name);
 		this.value = value;

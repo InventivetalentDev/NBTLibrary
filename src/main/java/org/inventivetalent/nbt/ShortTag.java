@@ -16,6 +16,14 @@ public class ShortTag extends NBTTag<Short> {
 
 	private final short value;
 
+	public ShortTag() {
+		this((short) 0);
+	}
+
+	public ShortTag(short value) {
+		super("");this.value=value;
+	}
+
 	public ShortTag(String name, short value) {
 		super(name);
 		this.value = value;

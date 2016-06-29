@@ -18,6 +18,15 @@ public class IntArrayTag extends NBTTag<int[]> implements Iterable<Integer> {
 
 	private final int[] value;
 
+	public IntArrayTag() {
+		this(new int[0]);
+	}
+
+	public IntArrayTag(int[] value) {
+		super("");
+		this.value = value;
+	}
+
 	public IntArrayTag(String name, int[] value) {
 		super(name);
 		this.value = value;
