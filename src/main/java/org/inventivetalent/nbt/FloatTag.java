@@ -54,4 +54,9 @@ public class FloatTag extends NBTTag<Float> {
 	public String getTypeName() {
 		return "TAG_Float";
 	}
+
+	@Override
+	public String getNMSClass() {
+		return "NBTTagFloat";
+	}
 }

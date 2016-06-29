@@ -54,4 +54,9 @@ public class LongTag extends NBTTag<Long> {
 	public String getTypeName() {
 		return "TAG_Long";
 	}
+
+	@Override
+	public String getNMSClass() {
+		return "NBTTagLong";
+	}
 }

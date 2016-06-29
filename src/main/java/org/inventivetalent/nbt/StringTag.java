@@ -56,4 +56,9 @@ public class StringTag extends NBTTag<String> {
 	public String getTypeName() {
 		return "TAG_String";
 	}
+
+	@Override
+	public String getNMSClass() {
+		return "NBTTagString";
+	}
 }

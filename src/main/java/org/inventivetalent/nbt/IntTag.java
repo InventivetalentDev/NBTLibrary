@@ -53,4 +53,9 @@ public class IntTag extends NBTTag<Integer> {
 	public String getTypeName() {
 		return "TAG_Int";
 	}
+
+	@Override
+	public String getNMSClass() {
+		return "NBTTagInt";
+	}
 }

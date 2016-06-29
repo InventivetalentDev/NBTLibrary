@@ -66,4 +66,9 @@ public class ByteArrayTag extends NBTTag<byte[]> implements Iterable<Byte> {
 	public Iterator<Byte> iterator() {
 		return Bytes.asList(value).iterator();
 	}
+
+	@Override
+	public String getNMSClass() {
+		return "NBTTagByteArray";
+	}
 }

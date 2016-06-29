@@ -8,6 +8,7 @@ import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -89,5 +90,41 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 	@Override
 	public Iterator<NBTTag> iterator() {
 		return value.iterator();
+	}
+
+	@Override
+	public String getNMSClass() {
+		return "NBTTagList";
+	}
+
+	@Override
+	public ListTag fromNMS(Object nms) throws ReflectiveOperationException {
+		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
+
+		Field typeField = clazz.getDeclaredField("type");
+		typeField.setAccessible(true);
+		byte typeId = typeField.getByte(nms);
+
+		Field field = clazz.getDeclaredField("list");
+		field.setAccessible(true);
+		List<Object> nmsList = (List<Object>) field.get(nms);
+		List<NBTTag> list = new ArrayList<>();
+		for (Object nmsTag : nmsList) {
+			list.add(NBTTag.forType(typeId).newInstance().fromNMS(nmsTag));
+		}
+		return new ListTag("", typeId, list);
+	}
+
+	@Override
+	public Object toNMS() throws ReflectiveOperationException {
+		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
+		Field field = clazz.getDeclaredField("list");
+		field.setAccessible(true);
+		Object nms = clazz.newInstance();
+		List list = (List) field.get(nms);
+		for (NBTTag tag : this) {
+			list.add(tag.toNMS());
+		}
+		return nms;
 	}
 }

@@ -54,4 +54,9 @@ public class DoubleTag extends NBTTag<Double> {
 	public String getTypeName() {
 		return "TAG_Double";
 	}
+
+	@Override
+	public String getNMSClass() {
+		return "NBTTagDouble";
+	}
 }

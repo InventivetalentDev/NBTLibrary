@@ -53,4 +53,9 @@ public class ShortTag extends NBTTag<Short> {
 	public String getTypeName() {
 		return "TAG_Short";
 	}
+
+	@Override
+	public String getNMSClass() {
+		return "NBTTagShort";
+	}
 }
