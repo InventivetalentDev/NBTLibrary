@@ -1,0 +1,64 @@
+package org.inventivetalent.nbt;
+
+import com.google.gson.JsonArray;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import org.inventivetalent.nbt.stream.NBTOutputStream;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
+
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class ListTag extends NBTTag<List<NBTTag>> {
+
+	private final int          tagType;
+	private final List<NBTTag> value;
+
+	public ListTag(String name, int tagType, List<NBTTag> value) {
+		super(name);
+		this.tagType = tagType;
+		this.value = Collections.unmodifiableList(value);
+	}
+
+	public int getTagType() {
+		return tagType;
+	}
+
+	@Override
+	public List<NBTTag> getValue() {
+		return value;
+	}
+
+	@Override
+	public JsonArray asJson() {
+		JsonArray jsonArray = new JsonArray();
+		for (NBTTag tag : value) {
+			jsonArray.add(tag.asJson());
+		}
+		return jsonArray;
+	}
+
+	@Override
+	public void write(NBTOutputStream nbtOut, DataOutputStream out) throws IOException {
+		out.writeByte(getTagType());
+		out.writeInt(value.size());
+		for (NBTTag tag : value) {
+			nbtOut.writeTagContent(tag);
+		}
+	}
+
+	@Override
+	public int getTypeId() {
+		return TagID.TAG_LIST;
+	}
+
+	@Override
+	public String getTypeName() {
+		return "TAG_List";
+	}
+}
