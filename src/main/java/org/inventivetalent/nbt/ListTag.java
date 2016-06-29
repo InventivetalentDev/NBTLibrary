@@ -8,7 +8,7 @@ import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,7 +22,7 @@ public class ListTag extends NBTTag<List<NBTTag>> {
 	public ListTag(String name, int tagType, List<NBTTag> value) {
 		super(name);
 		this.tagType = tagType;
-		this.value = Collections.unmodifiableList(value);
+		this.value = new ArrayList<>(value);
 	}
 
 	public int getTagType() {
@@ -36,6 +36,18 @@ public class ListTag extends NBTTag<List<NBTTag>> {
 
 	public NBTTag get(int index) {
 		return value.get(index);
+	}
+
+	public void add(NBTTag tag) {
+		value.add(tag);
+	}
+
+	public void add(int index, NBTTag tag) {
+		value.add(index, tag);
+	}
+
+	public void set(int index, NBTTag tag) {
+		value.set(index, tag);
 	}
 
 	@Override
