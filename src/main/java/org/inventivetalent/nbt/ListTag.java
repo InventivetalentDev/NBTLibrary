@@ -21,6 +21,12 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 	private final int          tagType;
 	private final List<NBTTag> value;
 
+	public ListTag(int tagType, List<NBTTag> value) {
+		super("");
+		this.tagType=tagType;
+		this.value=value;
+	}
+
 	public ListTag(String name, int tagType, List<NBTTag> value) {
 		super(name);
 		this.tagType = tagType;
@@ -40,6 +46,7 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 		return value.get(index);
 	}
 
+	// TODO: validate tag type
 	public void add(NBTTag tag) {
 		value.add(tag);
 	}

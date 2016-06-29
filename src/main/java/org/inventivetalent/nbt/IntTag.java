@@ -16,6 +16,15 @@ public class IntTag extends NBTTag<Integer> {
 
 	private int value;
 
+	public IntTag() {
+		this(0);
+	}
+
+	public IntTag(int value) {
+		super("");
+		this.value=value;
+	}
+
 	public IntTag(String name, int value) {
 		super(name);
 		this.value = value;

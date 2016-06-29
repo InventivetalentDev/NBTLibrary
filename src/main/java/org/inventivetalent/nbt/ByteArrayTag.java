@@ -18,6 +18,15 @@ public class ByteArrayTag extends NBTTag<byte[]> implements Iterable<Byte> {
 
 	private final byte[] value;
 
+	public ByteArrayTag() {
+		this(new byte[0]);
+	}
+
+	public ByteArrayTag(byte[] value) {
+		super("");
+		this.value = value;
+	}
+
 	public ByteArrayTag(String name, byte[] value) {
 		super(name);
 		this.value = value;

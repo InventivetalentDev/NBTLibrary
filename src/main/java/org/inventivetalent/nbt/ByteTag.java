@@ -16,6 +16,15 @@ public class ByteTag extends NBTTag<Byte> {
 
 	private final byte value;
 
+	public ByteTag() {
+		this((byte) 0);
+	}
+
+	public ByteTag(byte value) {
+		super("");
+		this.value = value;
+	}
+
 	public ByteTag(String name, byte value) {
 		super(name);
 		this.value = value;

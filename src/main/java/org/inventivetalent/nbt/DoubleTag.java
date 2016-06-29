@@ -16,6 +16,15 @@ public class DoubleTag extends NBTTag<Double> {
 
 	private final double value;
 
+	public DoubleTag() {
+		this(0);
+	}
+
+	public DoubleTag(double value) {
+		super("");
+		this.value = value;
+	}
+
 	public DoubleTag(String name, double value) {
 		super(name);
 		this.value = value;
