@@ -9,9 +9,7 @@ import org.inventivetalent.nbt.stream.NBTOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -134,6 +132,9 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		Map<String, NBTTag> map = new HashMap<>();
 		for (Map.Entry<String, Object> nmsEntry : nmsMap.entrySet()) {
 			byte typeId = (byte) nbtBaseClass.getMethod("getTypeId").invoke(nmsEntry.getValue());
+			if (typeId == TagID.TAG_LIST) {
+				map.put(nmsEntry.getKey(), ((NBTTag) NBTTag.forType(typeId).getConstructor(int.class, List.class).newInstance(0, new ArrayList<>())).fromNMS(nmsEntry.getValue()));
+			}
 			map.put(nmsEntry.getKey(), NBTTag.forType(typeId).newInstance().fromNMS(nmsEntry.getValue()));
 		}
 		return new CompoundTag("", map);
