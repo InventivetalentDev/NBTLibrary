@@ -12,7 +12,7 @@ import java.io.IOException;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class FloatTag extends NBTTag<Float> {
+public class FloatTag extends NumberTag<Float> {
 
 	private final float value;
 
