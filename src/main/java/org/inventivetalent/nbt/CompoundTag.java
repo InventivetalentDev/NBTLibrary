@@ -8,7 +8,7 @@ import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 @Data
@@ -20,7 +20,7 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> {
 
 	public CompoundTag(String name, Map<String, NBTTag> value) {
 		super(name);
-		this.value = Collections.unmodifiableMap(value);
+		this.value = new HashMap<>(value);
 	}
 
 	@Override
@@ -30,6 +30,50 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> {
 
 	public NBTTag get(String name) {
 		return value.get(name);
+	}
+
+	public void set(String name, NBTTag tag) {
+		this.value.put(name, tag);
+	}
+
+	public void set(String name, byte b) {
+		set(name, new ByteTag(name, b));
+	}
+
+	public void set(String name, short s) {
+		set(name, new ShortTag(name, s));
+	}
+
+	public void set(String name, int i) {
+		set(name, new IntTag(name, i));
+	}
+
+	public void set(String name, long l) {
+		set(name, new LongTag(name, l));
+	}
+
+	public void set(String name, float f) {
+		set(name, new FloatTag(name, f));
+	}
+
+	public void set(String name, double d) {
+		set(name, new DoubleTag(name, d));
+	}
+
+	public void set(String name, String string) {
+		set(name, new StringTag(name, string));
+	}
+
+	public void set(String name, byte[] b) {
+		set(name, new ByteArrayTag(name, b));
+	}
+
+	public void set(String name, int[] i) {
+		set(name, new IntArrayTag(name, i));
+	}
+
+	public void set(String name, boolean b) {
+		set(name, (byte) (b ? 1 : 0));
 	}
 
 	@Override
@@ -42,7 +86,7 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> {
 	}
 
 	@Override
-	public void write(NBTOutputStream nbtOut,DataOutputStream out) throws IOException {
+	public void write(NBTOutputStream nbtOut, DataOutputStream out) throws IOException {
 		for (NBTTag tag : value.values()) {
 			nbtOut.writeTag(tag);
 		}
