@@ -8,6 +8,7 @@ import org.inventivetalent.reflection.resolver.minecraft.NMSClassResolver;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 
 import static org.inventivetalent.nbt.TagID.*;
@@ -44,7 +45,15 @@ public abstract class NBTTag<V> {
 
 	public Object toNMS() throws ReflectiveOperationException {
 		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
-		return clazz.getConstructors()[0].newInstance(getValue());
+		Constructor constructor=null;
+		for (Constructor constr : clazz.getConstructors()) {
+			if (constr.getParameterTypes().length == 1) {
+				constructor=constr;
+				break;
+			}
+		}
+		if (constructor == null) { return null; }
+		return constructor.newInstance(getValue());
 	}
 
 	public static Class<? extends NBTTag> forType(int type) {
