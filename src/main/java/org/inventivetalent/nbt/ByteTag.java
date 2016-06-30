@@ -1,17 +1,13 @@
 package org.inventivetalent.nbt;
 
 import com.google.gson.JsonPrimitive;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-@Data
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 public class ByteTag extends NumberTag<Byte> {
 
 	private final byte value;

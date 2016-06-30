@@ -1,7 +1,6 @@
 package org.inventivetalent.nbt;
 
 import com.google.gson.JsonElement;
-import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 import org.inventivetalent.reflection.resolver.minecraft.NMSClassResolver;
@@ -13,11 +12,10 @@ import java.lang.reflect.Field;
 
 import static org.inventivetalent.nbt.TagID.*;
 
-@Data
 @RequiredArgsConstructor
 public abstract class NBTTag<V> {
 
-	static final NMSClassResolver NMS_CLASS_RESOLVER = new NMSClassResolver();
+	public static NMSClassResolver NMS_CLASS_RESOLVER = new NMSClassResolver();
 
 	private final String name;
 
@@ -50,6 +48,10 @@ public abstract class NBTTag<V> {
 			default:
 				throw new IllegalArgumentException("Invalid NBTTag type " + type);
 		}
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public abstract V getValue();
@@ -87,4 +89,8 @@ public abstract class NBTTag<V> {
 		return constructor.newInstance(getValue());
 	}
 
+	@Override
+	public String toString() {
+		return getTypeName() + "(" + getName() + "): " + getValue();
+	}
 }

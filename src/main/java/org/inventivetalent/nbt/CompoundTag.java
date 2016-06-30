@@ -1,9 +1,7 @@
 package org.inventivetalent.nbt;
 
 import com.google.gson.JsonObject;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
@@ -11,9 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
 
-@Data
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable<Map.Entry<String, NBTTag>> {
 
 	private final Map<String, NBTTag> value;
@@ -129,16 +125,16 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		Field field = clazz.getDeclaredField("map");
 		field.setAccessible(true);
 		Map<String, Object> nmsMap = (Map<String, Object>) field.get(nms);
-		Map<String, NBTTag> map = new HashMap<>();
+		CompoundTag compoundTag = new CompoundTag();
 		for (Map.Entry<String, Object> nmsEntry : nmsMap.entrySet()) {
 			byte typeId = (byte) nbtBaseClass.getMethod("getTypeId").invoke(nmsEntry.getValue());
 			if (typeId == TagID.TAG_LIST) {
-				map.put(nmsEntry.getKey(), ((NBTTag) NBTTag.forType(typeId).getConstructor(int.class, List.class).newInstance(0, new ArrayList<>())).fromNMS(nmsEntry.getValue()));
+				compoundTag.set(nmsEntry.getKey(), ((NBTTag) NBTTag.forType(typeId).getConstructor(int.class, List.class).newInstance(0, new ArrayList<>())).fromNMS(nmsEntry.getValue()));
 			} else {
-				map.put(nmsEntry.getKey(), NBTTag.forType(typeId).newInstance().fromNMS(nmsEntry.getValue()));
+				compoundTag.set(nmsEntry.getKey(), NBTTag.forType(typeId).newInstance().fromNMS(nmsEntry.getValue()));
 			}
 		}
-		return new CompoundTag("", map);
+		return compoundTag;
 	}
 
 	@Override
@@ -149,8 +145,12 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		Object nms = clazz.newInstance();
 		Map map = (Map) field.get(nms);
 		for (Map.Entry<String, NBTTag> entry : this) {
+			System.out.println(entry);
 			map.put(entry.getKey(), entry.getValue().toNMS());
 		}
+		System.out.println(map);
+		System.out.println("Set!");
+		field.set(nms, map);
 		return nms;
 	}
 }

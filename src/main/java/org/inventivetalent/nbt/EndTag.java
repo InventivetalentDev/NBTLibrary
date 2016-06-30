@@ -2,17 +2,13 @@ package org.inventivetalent.nbt;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-@Data
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
 public class EndTag extends NBTTag<Void> {
 
 	public EndTag() {
@@ -60,4 +56,5 @@ public class EndTag extends NBTTag<Void> {
 		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
 		return clazz.newInstance();
 	}
+
 }
