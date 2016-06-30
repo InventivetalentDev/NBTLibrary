@@ -69,6 +69,11 @@ public class NMSTest {
 		for (String key : compressedCompoundTag.getValue().keySet()) {
 			assertEquals("Key: " + key, compressedCompoundTag.get(key).getValue(), compoundTag.get(key).getValue());
 		}
+
+		System.out.println(compoundTag.asJson());
+		System.out.println(compoundTag.toNMS());
+
+		assertEquals(compressedTag, compoundTag.toNMS());
 	}
 
 }
