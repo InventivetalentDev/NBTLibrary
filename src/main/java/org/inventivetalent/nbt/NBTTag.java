@@ -26,6 +26,10 @@ public abstract class NBTTag<V> {
 
 	}
 
+	public static NBTTag createTpe(int type) throws IllegalAccessException, InstantiationException {
+		return forType(type).newInstance();
+	}
+
 	public static Class<? extends NBTTag> forType(int type) {
 		switch (type) {
 			case TAG_BYTE_ARRAY:
