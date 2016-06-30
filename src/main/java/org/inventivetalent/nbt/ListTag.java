@@ -123,7 +123,9 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 		List<Object> nmsList = (List<Object>) field.get(nms);
 
 		for (Object o : nmsList) {
-			add((NBTTag) (NBTTag.forType(typeId).newInstance()).fromNMS(o));
+			NBTTag nbtTag = NBTTag.forType(typeId).newInstance();
+			if (nbtTag.getTypeId() == TagID.TAG_END) { continue; }
+			add(nbtTag.fromNMS(o));
 		}
 		return this;
 	}
