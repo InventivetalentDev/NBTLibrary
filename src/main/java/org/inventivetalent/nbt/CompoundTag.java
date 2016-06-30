@@ -7,7 +7,9 @@ import org.inventivetalent.nbt.stream.NBTOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 @EqualsAndHashCode(callSuper = true)
 public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable<Map.Entry<String, NBTTag>> {
@@ -130,16 +132,16 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		Field field = clazz.getDeclaredField("map");
 		field.setAccessible(true);
 		Map<String, Object> nmsMap = (Map<String, Object>) field.get(nms);
-		CompoundTag compoundTag = new CompoundTag();
+
 		for (Map.Entry<String, Object> nmsEntry : nmsMap.entrySet()) {
 			byte typeId = (byte) nbtBaseClass.getMethod("getTypeId").invoke(nmsEntry.getValue());
 			if (typeId == TagID.TAG_LIST) {
-				compoundTag.set(nmsEntry.getKey(), ((NBTTag) NBTTag.forType(typeId).getConstructor(int.class, List.class).newInstance(0, new ArrayList<>())).fromNMS(nmsEntry.getValue()));
+				set(nmsEntry.getKey(), new ListTag(typeId).fromNMS(nmsEntry.getValue()));
 			} else {
-				compoundTag.set(nmsEntry.getKey(), NBTTag.forType(typeId).newInstance().fromNMS(nmsEntry.getValue()));
+				set(nmsEntry.getKey(), NBTTag.forType(typeId).newInstance().fromNMS(nmsEntry.getValue()));
 			}
 		}
-		return compoundTag;
+		return this;
 	}
 
 	@Override
