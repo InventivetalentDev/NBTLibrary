@@ -144,7 +144,7 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 			} else if (typeId == TagID.TAG_STRING) {
 				set(nmsEntry.getKey(), new StringTag(nmsEntry.getKey(), "null").fromNMS(nmsEntry.getValue()));
 			} else {
-				set(nmsEntry.getKey(), NBTTag.forType(typeId).newInstance().fromNMS(nmsEntry.getValue()));
+				set(nmsEntry.getKey(), NBTTag.forType(typeId).getConstructor(String.class).newInstance(nmsEntry.getKey()).fromNMS(nmsEntry.getValue()));
 			}
 		}
 		return this;
