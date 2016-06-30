@@ -10,7 +10,7 @@ import java.io.IOException;
 @EqualsAndHashCode(callSuper = true)
 public class LongTag extends NumberTag<Long> {
 
-	private final long value;
+	private long value;
 
 	public LongTag() {
 		this(0);
@@ -29,6 +29,11 @@ public class LongTag extends NumberTag<Long> {
 	@Override
 	public Long getValue() {
 		return value;
+	}
+
+	@Override
+	public void setValue(Long aLong) {
+		this.value = aLong;
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package org.inventivetalent.nbt;
 
 import com.google.gson.JsonElement;
-import lombok.RequiredArgsConstructor;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 import org.inventivetalent.reflection.resolver.minecraft.NMSClassResolver;
 
@@ -12,12 +11,20 @@ import java.lang.reflect.Field;
 
 import static org.inventivetalent.nbt.TagID.*;
 
-@RequiredArgsConstructor
 public abstract class NBTTag<V> {
 
 	public static NMSClassResolver NMS_CLASS_RESOLVER = new NMSClassResolver();
 
 	private final String name;
+
+	public NBTTag(String name) {
+		this.name = name;
+	}
+
+	public NBTTag(String name, Object nmsTag) {
+		this.name = name;
+
+	}
 
 	public static Class<? extends NBTTag> forType(int type) {
 		switch (type) {
@@ -55,6 +62,8 @@ public abstract class NBTTag<V> {
 	}
 
 	public abstract V getValue();
+
+	public abstract void setValue(V v);
 
 	public abstract JsonElement asJson();
 

@@ -10,7 +10,7 @@ import java.io.IOException;
 @EqualsAndHashCode(callSuper = true)
 public class DoubleTag extends NumberTag<Double> {
 
-	private final double value;
+	private double value;
 
 	public DoubleTag() {
 		this(0);
@@ -29,6 +29,11 @@ public class DoubleTag extends NumberTag<Double> {
 	@Override
 	public Double getValue() {
 		return value;
+	}
+
+	@Override
+	public void setValue(Double aDouble) {
+		this.value = aDouble;
 	}
 
 	@Override

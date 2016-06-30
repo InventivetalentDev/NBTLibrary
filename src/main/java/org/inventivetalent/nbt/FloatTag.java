@@ -10,7 +10,7 @@ import java.io.IOException;
 @EqualsAndHashCode(callSuper = true)
 public class FloatTag extends NumberTag<Float> {
 
-	private final float value;
+	private float value;
 
 	public FloatTag() {
 		this(0);
@@ -29,6 +29,11 @@ public class FloatTag extends NumberTag<Float> {
 	@Override
 	public Float getValue() {
 		return value;
+	}
+
+	@Override
+	public void setValue(Float aFloat) {
+		this.value = aFloat;
 	}
 
 	@Override

@@ -25,6 +25,10 @@ public class EndTag extends NBTTag<Void> {
 	}
 
 	@Override
+	public void setValue(Void aVoid) {
+	}
+
+	@Override
 	public JsonElement asJson() {
 		return JsonNull.INSTANCE;
 	}

@@ -10,7 +10,7 @@ import java.io.IOException;
 @EqualsAndHashCode(callSuper = true)
 public class StringTag extends NBTTag<String> {
 
-	private final String value;
+	private String value;
 
 	public StringTag() {
 		this("");
@@ -29,6 +29,11 @@ public class StringTag extends NBTTag<String> {
 	@Override
 	public String getValue() {
 		return value;
+	}
+
+	@Override
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	@Override

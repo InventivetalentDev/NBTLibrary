@@ -10,7 +10,7 @@ import java.io.IOException;
 @EqualsAndHashCode(callSuper = true)
 public class ShortTag extends NumberTag<Short> {
 
-	private final short value;
+	private short value;
 
 	public ShortTag() {
 		this((short) 0);
@@ -29,6 +29,11 @@ public class ShortTag extends NumberTag<Short> {
 	@Override
 	public Short getValue() {
 		return value;
+	}
+
+	@Override
+	public void setValue(Short aShort) {
+		this.value = aShort;
 	}
 
 	@Override

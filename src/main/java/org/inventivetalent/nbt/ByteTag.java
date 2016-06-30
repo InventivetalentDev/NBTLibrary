@@ -10,7 +10,7 @@ import java.io.IOException;
 @EqualsAndHashCode(callSuper = true)
 public class ByteTag extends NumberTag<Byte> {
 
-	private final byte value;
+	private  byte value;
 
 	public ByteTag() {
 		this((byte) 0);
@@ -29,6 +29,11 @@ public class ByteTag extends NumberTag<Byte> {
 	@Override
 	public Byte getValue() {
 		return value;
+	}
+
+	@Override
+	public void setValue(Byte aByte) {
+		this.value = aByte;
 	}
 
 	@Override

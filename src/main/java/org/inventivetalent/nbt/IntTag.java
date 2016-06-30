@@ -32,6 +32,11 @@ public class IntTag extends NumberTag<Integer> {
 	}
 
 	@Override
+	public void setValue(Integer integer) {
+		this.value = integer;
+	}
+
+	@Override
 	public JsonPrimitive asJson() {
 		return new JsonPrimitive(value);
 	}

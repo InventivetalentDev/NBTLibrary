@@ -34,6 +34,11 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		return value;
 	}
 
+	@Override
+	public void setValue(Map<String, NBTTag> value) {
+		this.value.putAll(value);
+	}
+
 	public NBTTag get(String name) {
 		return value.get(name);
 	}

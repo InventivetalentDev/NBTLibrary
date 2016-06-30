@@ -13,7 +13,7 @@ import java.util.Iterator;
 @EqualsAndHashCode(callSuper = true)
 public class IntArrayTag extends ArrayTag<int[], Integer> {
 
-	private final int[] value;
+	private int[] value;
 
 	public IntArrayTag() {
 		this(new int[0]);
@@ -32,6 +32,11 @@ public class IntArrayTag extends ArrayTag<int[], Integer> {
 	@Override
 	public int[] getValue() {
 		return value;
+	}
+
+	@Override
+	public void setValue(int[] value) {
+		this.value = value;
 	}
 
 	@Override

@@ -38,6 +38,11 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 		return value;
 	}
 
+	@Override
+	public void setValue(List<NBTTag> value) {
+		this.value.addAll(value);
+	}
+
 	public NBTTag get(int index) {
 		return value.get(index);
 	}

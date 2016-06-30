@@ -13,7 +13,7 @@ import java.util.Iterator;
 @EqualsAndHashCode(callSuper = true)
 public class ByteArrayTag extends ArrayTag<byte[], Byte> {
 
-	private final byte[] value;
+	private byte[] value;
 
 	public ByteArrayTag() {
 		this(new byte[0]);
@@ -32,6 +32,11 @@ public class ByteArrayTag extends ArrayTag<byte[], Byte> {
 	@Override
 	public byte[] getValue() {
 		return value;
+	}
+
+	@Override
+	public void setValue(byte[] value) {
+		this.value = value;
 	}
 
 	@Override
