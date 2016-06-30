@@ -82,7 +82,8 @@ public abstract class NBTTag<V> {
 		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
 		Field field = clazz.getDeclaredField("data");
 		field.setAccessible(true);
-		return (NBTTag) getClass().getConstructors()[0].newInstance("", field.get(nms));
+		setValue((V) field.get(nms));
+		return this;
 	}
 
 	public Object toNMS() throws ReflectiveOperationException {
