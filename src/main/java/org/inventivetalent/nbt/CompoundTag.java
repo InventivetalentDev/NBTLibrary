@@ -160,7 +160,7 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		for (Map.Entry<String, NBTTag> entry : this) {
 			map.put(entry.getKey(), entry.getValue().toNMS());
 		}
-		field.set(nms, map);
+		field.set(nms, map);// I don't quite get why this doesn't complain about illegal access (the field is private final)
 		return nms;
 	}
 
