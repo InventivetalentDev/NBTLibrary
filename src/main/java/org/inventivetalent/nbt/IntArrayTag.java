@@ -2,6 +2,7 @@ package org.inventivetalent.nbt;
 
 import com.google.common.primitives.Ints;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonPrimitive;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -41,7 +42,7 @@ public class IntArrayTag extends ArrayTag<int[], Integer> {
 	public JsonArray asJson() {
 		JsonArray jsonArray = new JsonArray();
 		for (int i : value) {
-			jsonArray.add(i);
+			jsonArray.add(new JsonPrimitive(i));
 		}
 		return jsonArray;
 	}
