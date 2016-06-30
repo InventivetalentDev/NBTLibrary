@@ -24,6 +24,10 @@ public class ByteArrayTag extends ArrayTag<byte[], Byte> {
 		this.value = value;
 	}
 
+	public ByteArrayTag(String name) {
+		super(name);
+	}
+
 	public ByteArrayTag(String name, byte[] value) {
 		super(name);
 		this.value = value;

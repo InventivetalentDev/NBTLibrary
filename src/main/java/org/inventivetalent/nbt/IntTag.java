@@ -21,6 +21,10 @@ public class IntTag extends NumberTag<Integer> {
 		this.value = value;
 	}
 
+	public IntTag(String name) {
+		super(name);
+	}
+
 	public IntTag(String name, int value) {
 		super(name);
 		this.value = value;

@@ -21,6 +21,10 @@ public class FloatTag extends NumberTag<Float> {
 		this.value = value;
 	}
 
+	public FloatTag(String name) {
+		super(name);
+	}
+
 	public FloatTag(String name, float value) {
 		super(name);
 		this.value = value;

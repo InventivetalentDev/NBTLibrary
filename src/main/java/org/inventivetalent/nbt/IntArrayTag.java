@@ -24,6 +24,10 @@ public class IntArrayTag extends ArrayTag<int[], Integer> {
 		this.value = value;
 	}
 
+	public IntArrayTag(String name) {
+		super(name);
+	}
+
 	public IntArrayTag(String name, int[] value) {
 		super(name);
 		this.value = value;

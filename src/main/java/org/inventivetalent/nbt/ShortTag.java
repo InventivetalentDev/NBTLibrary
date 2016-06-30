@@ -21,6 +21,10 @@ public class ShortTag extends NumberTag<Short> {
 		this.value = value;
 	}
 
+	public ShortTag(String name) {
+		super(name);
+	}
+
 	public ShortTag(String name, short value) {
 		super(name);
 		this.value = value;

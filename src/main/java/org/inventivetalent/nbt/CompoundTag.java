@@ -26,6 +26,11 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		this.value = new HashMap<>(value);
 	}
 
+	public CompoundTag(String name) {
+		super(name);
+		this.value = new HashMap<>();
+	}
+
 	public CompoundTag(String name, Map<String, NBTTag> value) {
 		super(name);
 		this.value = new HashMap<>(value);

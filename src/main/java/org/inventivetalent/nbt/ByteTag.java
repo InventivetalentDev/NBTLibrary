@@ -21,6 +21,10 @@ public class ByteTag extends NumberTag<Byte> {
 		this.value = value;
 	}
 
+	public ByteTag(String name) {
+		super(name);
+	}
+
 	public ByteTag(String name, byte value) {
 		super(name);
 		this.value = value;
