@@ -65,6 +65,7 @@ public class NMSTest {
 		CompoundTag compoundTag = new CompoundTag().fromNMS(compressedTag);
 		System.out.println(compoundTag);
 
+		assertEquals(compressedCompoundTag.getValue().size(), compoundTag.getValue().size());
 		for (String key : compressedCompoundTag.getValue().keySet()) {
 			assertEquals("Key: " + key, compressedCompoundTag.get(key).getValue(), compoundTag.get(key).getValue());
 		}
