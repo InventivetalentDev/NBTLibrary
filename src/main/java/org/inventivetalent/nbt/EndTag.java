@@ -9,7 +9,6 @@ import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -54,13 +53,11 @@ public class EndTag extends NBTTag<Void> {
 	}
 
 	public NBTTag fromNMS(Object nms) throws ReflectiveOperationException {
-		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
-		Field field = clazz.getDeclaredField("data");
-		return (NBTTag) getClass().getConstructors()[0].newInstance("", field.get(nms));
+		return new EndTag();
 	}
 
 	public Object toNMS() throws ReflectiveOperationException {
 		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
-		return clazz.getConstructors()[0].newInstance(getValue());
+		return clazz.newInstance();
 	}
 }
