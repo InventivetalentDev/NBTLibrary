@@ -58,17 +58,17 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 	}
 
 	public void add(NBTTag tag) {
-		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type"); }
+		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type (List: " + getTagType() + ", Tag: " + tag.getTypeId() + ")"); }
 		value.add(tag);
 	}
 
 	public void add(int index, NBTTag tag) {
-		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type"); }
+		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type (List: " + getTagType() + ", Tag: " + tag.getTypeId() + ")"); }
 		value.add(index, tag);
 	}
 
 	public void set(int index, NBTTag tag) {
-		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type"); }
+		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type (List: " + getTagType() + ", Tag: " + tag.getTypeId() + ")"); }
 		value.set(index, tag);
 	}
 
