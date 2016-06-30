@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 
-	private final int          tagType;
+	private       int          tagType;
 	private final List<NBTTag> value;
 
 	public ListTag(int tagType) {
@@ -39,6 +39,10 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 
 	public int getTagType() {
 		return tagType;
+	}
+
+	public void setTagType(int tagType) {
+		this.tagType = tagType;
 	}
 
 	@Override
@@ -116,6 +120,7 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 		typeField.setAccessible(true);
 		byte typeId = typeField.getByte(nms);
 		System.out.println(typeId);
+		setTagType(typeId);
 
 		Field field = clazz.getDeclaredField("list");
 		field.setAccessible(true);
