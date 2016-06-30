@@ -62,7 +62,7 @@ public class NMSTest {
 	public void compressedFromNMSTest() throws Exception {
 		compressedToNMSTest();
 
-		CompoundTag compoundTag = new CompoundTag().fromNMS(compressedTag);
+		CompoundTag compoundTag = new CompoundTag("Level").fromNMS(compressedTag);
 		System.out.println(compoundTag);
 
 		assertEquals(compressedCompoundTag.getValue().size(), compoundTag.getValue().size());
@@ -74,6 +74,11 @@ public class NMSTest {
 		System.out.println(compoundTag.toNMS());
 
 		assertEquals(compressedTag, compoundTag.toNMS());
+
+
+		System.out.println("  ");
+		System.out.println("A: " + compressedCompoundTag.toString());
+		System.out.println("B: " + compoundTag.toString());
 	}
 
 }
