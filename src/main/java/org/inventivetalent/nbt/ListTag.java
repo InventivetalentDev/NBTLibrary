@@ -115,6 +115,7 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 		Field typeField = clazz.getDeclaredField("type");
 		typeField.setAccessible(true);
 		byte typeId = typeField.getByte(nms);
+		System.out.println(typeId);
 
 		Field field = clazz.getDeclaredField("list");
 		field.setAccessible(true);
@@ -122,6 +123,8 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 
 		for (Object o : nmsList) {
 			NBTTag nbtTag = NBTTag.forType(typeId).newInstance();
+			System.out.println(nbtTag);
+			System.out.println(nbtTag.getTypeId());
 			if (nbtTag.getTypeId() == TagID.TAG_END) { continue; }
 			add(nbtTag.fromNMS(o));
 		}
@@ -131,9 +134,16 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 	@Override
 	public Object toNMS() throws ReflectiveOperationException {
 		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
+
 		Field field = clazz.getDeclaredField("list");
 		field.setAccessible(true);
+
 		Object nms = clazz.newInstance();
+
+		Field typeField = clazz.getDeclaredField("type");
+		typeField.setAccessible(true);
+		typeField.setByte(nms, (byte) getTagType());
+
 		List list = (List) field.get(nms);
 		for (NBTTag tag : this) {
 			list.add(tag.toNMS());
