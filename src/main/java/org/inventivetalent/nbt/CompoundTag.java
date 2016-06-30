@@ -134,8 +134,9 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 			byte typeId = (byte) nbtBaseClass.getMethod("getTypeId").invoke(nmsEntry.getValue());
 			if (typeId == TagID.TAG_LIST) {
 				map.put(nmsEntry.getKey(), ((NBTTag) NBTTag.forType(typeId).getConstructor(int.class, List.class).newInstance(0, new ArrayList<>())).fromNMS(nmsEntry.getValue()));
+			} else {
+				map.put(nmsEntry.getKey(), NBTTag.forType(typeId).newInstance().fromNMS(nmsEntry.getValue()));
 			}
-			map.put(nmsEntry.getKey(), NBTTag.forType(typeId).newInstance().fromNMS(nmsEntry.getValue()));
 		}
 		return new CompoundTag("", map);
 	}
