@@ -158,11 +158,8 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		Object nms = clazz.newInstance();
 		Map map = (Map) field.get(nms);
 		for (Map.Entry<String, NBTTag> entry : this) {
-			System.out.println(entry);
 			map.put(entry.getKey(), entry.getValue().toNMS());
 		}
-		System.out.println(map);
-		System.out.println("Set!");
 		field.set(nms, map);
 		return nms;
 	}
