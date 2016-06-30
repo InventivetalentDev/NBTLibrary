@@ -14,6 +14,8 @@ public class NMSTest {
 
 	String compressedToString;
 
+	CompoundTag compressedCompoundTag;
+
 	NBTTagCompound uncompressedTag;
 	NBTTagCompound compressedTag;
 
@@ -40,14 +42,14 @@ public class NMSTest {
 			System.out.println(uncompressedTag);
 
 			assertEquals(TagID.TAG_STRING, uncompressedTag.get("name").getTypeId());
-			assertEquals("Bananrama",  uncompressedTag.getString("name"));
+			assertEquals("Bananrama", uncompressedTag.getString("name"));
 		}
 	}
 
 	@Test
-	public void compressedToNMSTest( ) throws Exception {
-		try (NBTInputStream in = new NBTInputStream(StreamTest.class.getResourceAsStream("/bigtest.nbt"),true)) {
-			CompoundTag compoundTag = (CompoundTag) in.readNBTTag();
+	public void compressedToNMSTest() throws Exception {
+		try (NBTInputStream in = new NBTInputStream(StreamTest.class.getResourceAsStream("/bigtest.nbt"), true)) {
+			CompoundTag compoundTag = compressedCompoundTag = (CompoundTag) in.readNBTTag();
 			System.out.println(compoundTag);
 			compressedTag = (NBTTagCompound) compoundTag.toNMS();
 			System.out.println(compressedTag);
@@ -63,7 +65,9 @@ public class NMSTest {
 		CompoundTag compoundTag = new CompoundTag().fromNMS(compressedTag);
 		System.out.println(compoundTag);
 
-		assertEquals(compressedToString,compoundTag.toString());
+		for (String key : compressedCompoundTag.getValue().keySet()) {
+			assertEquals("Key: " + key, compressedCompoundTag.get(key).getValue(), compoundTag.get(key).getValue());
+		}
 	}
 
 }
