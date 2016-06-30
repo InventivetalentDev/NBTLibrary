@@ -115,11 +115,11 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 		Field field = clazz.getDeclaredField("list");
 		field.setAccessible(true);
 		List<Object> nmsList = (List<Object>) field.get(nms);
-		List<NBTTag> list = new ArrayList<>();
-		for (Object nmsTag : nmsList) {
-			list.add(NBTTag.forType(typeId).newInstance().fromNMS(nmsTag));
+
+		for (Object o : nmsList) {
+			add((NBTTag) (NBTTag.forType(typeId).newInstance()).fromNMS(o));
 		}
-		return new ListTag("", typeId, list);
+		return this;
 	}
 
 	@Override
