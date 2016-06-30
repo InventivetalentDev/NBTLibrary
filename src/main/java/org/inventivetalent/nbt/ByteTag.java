@@ -1,13 +1,11 @@
 package org.inventivetalent.nbt;
 
 import com.google.gson.JsonPrimitive;
-import lombok.EqualsAndHashCode;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-@EqualsAndHashCode(callSuper = true)
 public class ByteTag extends NumberTag<Byte> {
 
 	private  byte value;
@@ -63,5 +61,21 @@ public class ByteTag extends NumberTag<Byte> {
 	@Override
 	public String getNMSClass() {
 		return "NBTTagByte";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) { return true; }
+		if (o == null || getClass() != o.getClass()) { return false; }
+
+		ByteTag byteTag = (ByteTag) o;
+
+		return value == byteTag.value;
+
+	}
+
+	@Override
+	public int hashCode() {
+		return (int) value;
 	}
 }

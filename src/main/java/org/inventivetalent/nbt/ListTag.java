@@ -1,7 +1,6 @@
 package org.inventivetalent.nbt;
 
 import com.google.gson.JsonArray;
-import lombok.EqualsAndHashCode;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 
 	private final int          tagType;
@@ -142,5 +140,24 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 		}
 		field.set(nms, list);
 		return nms;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) { return true; }
+		if (o == null || getClass() != o.getClass()) { return false; }
+
+		ListTag listTag = (ListTag) o;
+
+		if (tagType != listTag.tagType) { return false; }
+		return value != null ? value.equals(listTag.value) : listTag.value == null;
+
+	}
+
+	@Override
+	public int hashCode() {
+		int result = tagType;
+		result = 31 * result + (value != null ? value.hashCode() : 0);
+		return result;
 	}
 }

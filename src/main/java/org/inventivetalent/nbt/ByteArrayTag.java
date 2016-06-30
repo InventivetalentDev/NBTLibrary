@@ -3,14 +3,13 @@ package org.inventivetalent.nbt;
 import com.google.common.primitives.Bytes;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonPrimitive;
-import lombok.EqualsAndHashCode;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Iterator;
 
-@EqualsAndHashCode(callSuper = true)
 public class ByteArrayTag extends ArrayTag<byte[], Byte> {
 
 	private byte[] value;
@@ -78,4 +77,19 @@ public class ByteArrayTag extends ArrayTag<byte[], Byte> {
 		return "NBTTagByteArray";
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) { return true; }
+		if (o == null || getClass() != o.getClass()) { return false; }
+
+		ByteArrayTag bytes = (ByteArrayTag) o;
+
+		return Arrays.equals(value, bytes.value);
+
+	}
+
+	@Override
+	public int hashCode() {
+		return Arrays.hashCode(value);
+	}
 }

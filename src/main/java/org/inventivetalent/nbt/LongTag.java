@@ -1,13 +1,11 @@
 package org.inventivetalent.nbt;
 
 import com.google.gson.JsonPrimitive;
-import lombok.EqualsAndHashCode;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-@EqualsAndHashCode(callSuper = true)
 public class LongTag extends NumberTag<Long> {
 
 	private long value;
@@ -63,5 +61,21 @@ public class LongTag extends NumberTag<Long> {
 	@Override
 	public String getNMSClass() {
 		return "NBTTagLong";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) { return true; }
+		if (o == null || getClass() != o.getClass()) { return false; }
+
+		LongTag longTag = (LongTag) o;
+
+		return value == longTag.value;
+
+	}
+
+	@Override
+	public int hashCode() {
+		return (int) (value ^ (value >>> 32));
 	}
 }

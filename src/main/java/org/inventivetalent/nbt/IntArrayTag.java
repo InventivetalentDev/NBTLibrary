@@ -3,14 +3,13 @@ package org.inventivetalent.nbt;
 import com.google.common.primitives.Ints;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonPrimitive;
-import lombok.EqualsAndHashCode;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Iterator;
 
-@EqualsAndHashCode(callSuper = true)
 public class IntArrayTag extends ArrayTag<int[], Integer> {
 
 	private int[] value;
@@ -78,5 +77,21 @@ public class IntArrayTag extends ArrayTag<int[], Integer> {
 	@Override
 	public String getNMSClass() {
 		return "NBTTagIntArray";
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) { return true; }
+		if (o == null || getClass() != o.getClass()) { return false; }
+
+		IntArrayTag integers = (IntArrayTag) o;
+
+		return Arrays.equals(value, integers.value);
+
+	}
+
+	@Override
+	public int hashCode() {
+		return Arrays.hashCode(value);
 	}
 }

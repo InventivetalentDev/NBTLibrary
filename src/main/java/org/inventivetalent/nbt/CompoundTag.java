@@ -1,7 +1,6 @@
 package org.inventivetalent.nbt;
 
 import com.google.gson.JsonObject;
-import lombok.EqualsAndHashCode;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
 import java.io.DataOutputStream;
@@ -11,7 +10,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-@EqualsAndHashCode(callSuper = true)
 public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable<Map.Entry<String, NBTTag>> {
 
 	private final Map<String, NBTTag> value;
@@ -167,5 +165,21 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		System.out.println("Set!");
 		field.set(nms, map);
 		return nms;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) { return true; }
+		if (o == null || getClass() != o.getClass()) { return false; }
+
+		CompoundTag that = (CompoundTag) o;
+
+		return value != null ? value.equals(that.value) : that.value == null;
+
+	}
+
+	@Override
+	public int hashCode() {
+		return value != null ? value.hashCode() : 0;
 	}
 }
