@@ -20,6 +20,11 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 		this.value = new ArrayList<>();
 	}
 
+	public ListTag(String name) {
+		super(name);
+		this.value = new ArrayList<>();
+	}
+
 	public ListTag(int tagType) {
 		this(tagType, new ArrayList<NBTTag>());
 	}
