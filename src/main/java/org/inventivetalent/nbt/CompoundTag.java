@@ -94,6 +94,10 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		set(name, (byte) (b ? 1 : 0));
 	}
 
+	public boolean has(String name) {
+		return value.containsKey(name);
+	}
+
 	@Override
 	public JsonObject asJson() {
 		JsonObject jsonObject = new JsonObject();
