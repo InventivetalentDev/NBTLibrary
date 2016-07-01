@@ -16,9 +16,9 @@ public class StringTag extends NBTTag<String> {
 		this("");
 	}
 
-	public StringTag(String value) {
-		super("");
-		this.value = value;
+	public StringTag(String name) {
+		super(name);
+		this.value = "";
 	}
 
 	public StringTag(String name, String value) {
