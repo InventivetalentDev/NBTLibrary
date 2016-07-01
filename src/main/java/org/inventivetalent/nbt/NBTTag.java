@@ -1,9 +1,11 @@
 package org.inventivetalent.nbt;
 
 import com.google.gson.JsonElement;
+import org.inventivetalent.nbt.stream.NBTInputStream;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 import org.inventivetalent.reflection.resolver.minecraft.NMSClassResolver;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -74,6 +76,9 @@ public abstract class NBTTag<V> {
 	public abstract int getTypeId();
 
 	public abstract String getTypeName();
+
+	public void read(NBTInputStream nbtIn, DataInputStream in, int depth) throws IOException {
+	}
 
 	public void write(NBTOutputStream nbtOut, DataOutputStream out) throws IOException {
 	}

@@ -3,8 +3,10 @@ package org.inventivetalent.nbt;
 import com.google.common.primitives.Ints;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonPrimitive;
+import org.inventivetalent.nbt.stream.NBTInputStream;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
@@ -49,6 +51,15 @@ public class IntArrayTag extends ArrayTag<int[], Integer> {
 			jsonArray.add(new JsonPrimitive(i));
 		}
 		return jsonArray;
+	}
+
+	@Override
+	public void read(NBTInputStream nbtIn, DataInputStream in, int depth) throws IOException {
+		int[] ints = new int[in.readInt()];
+		for (int i = 0; i < ints.length; i++) {
+			ints[i] = in.readInt();
+		}
+		value = ints;
 	}
 
 	@Override

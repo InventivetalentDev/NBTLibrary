@@ -1,8 +1,10 @@
 package org.inventivetalent.nbt;
 
 import com.google.gson.JsonPrimitive;
+import org.inventivetalent.nbt.stream.NBTInputStream;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -37,6 +39,13 @@ public class StringTag extends NBTTag<String> {
 	@Override
 	public JsonPrimitive asJson() {
 		return new JsonPrimitive(value);
+	}
+
+	@Override
+	public void read(NBTInputStream nbtIn, DataInputStream in, int depth) throws IOException {
+		byte[] bytes = new byte[in.readShort()];
+		in.readFully(bytes);
+		value = new String(bytes, NBTInputStream.UTF_8);
 	}
 
 	@Override

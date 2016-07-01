@@ -2,8 +2,10 @@ package org.inventivetalent.nbt;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
+import org.inventivetalent.nbt.stream.NBTInputStream;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -29,6 +31,10 @@ public class EndTag extends NBTTag<Void> {
 	@Override
 	public JsonElement asJson() {
 		return JsonNull.INSTANCE;
+	}
+
+	@Override
+	public void read(NBTInputStream nbtIn, DataInputStream in, int depth) throws IOException {
 	}
 
 	@Override

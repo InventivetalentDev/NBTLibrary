@@ -1,18 +1,14 @@
 package org.inventivetalent.nbt.stream;
 
-import org.inventivetalent.nbt.*;
+import org.inventivetalent.nbt.NBTTag;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.zip.GZIPInputStream;
 
-import static org.inventivetalent.nbt.TagID.*;
+import static org.inventivetalent.nbt.TagID.TAG_END;
 
 public class NBTInputStream implements AutoCloseable {
 
@@ -54,69 +50,12 @@ public class NBTInputStream implements AutoCloseable {
 	}
 
 	public NBTTag readTagContent(int tagType, String tagName, int depth) throws IOException {
-		switch (tagType) {
-			case TAG_END:
-				return new EndTag();
-			case TAG_BYTE:
-				return new ByteTag(tagName, in.readByte());
-			case TAG_DOUBLE:
-				return new DoubleTag(tagName, in.readDouble());
-			case TAG_FLOAT:
-				return new FloatTag(tagName, in.readFloat());
-			case TAG_INT:
-				return new IntTag(tagName, in.readInt());
-			case TAG_LONG:
-				return new LongTag(tagName, in.readLong());
-			case TAG_SHORT:
-				return new ShortTag(tagName, in.readShort());
-			case TAG_STRING: {
-				int length = in.readShort();
-				byte[] bytes = new byte[length];
-				in.readFully(bytes);
-				return new StringTag(tagName, new String(bytes, UTF_8));
-			}
-			case TAG_BYTE_ARRAY: {
-				int length = in.readInt();
-				byte[] bytes = new byte[length];
-				in.readFully(bytes);
-				return new ByteArrayTag(tagName, bytes);
-			}
-			case TAG_INT_ARRAY: {
-				int length = in.readInt();
-				int[] ints = new int[length];
-				for (int i = 0; i < length; i++) {
-					ints[i] = in.readInt();
-				}
-				return new IntArrayTag(tagName, ints);
-			}
-			case TAG_COMPOUND: {
-				Map<String, NBTTag> tags = new HashMap<>();
-				while (true) {
-					NBTTag tag = readNBTTag(depth + 1);
-					if (tag.getTypeId() == TAG_END) {
-						break;
-					} else {
-						tags.put(tag.getName(), tag);
-					}
-				}
-				return new CompoundTag(tagName, tags);
-			}
-			case TAG_LIST: {
-				int listType = in.readByte();
-				int length = in.readInt();
-
-				List<NBTTag> tags = new ArrayList<>();
-				for (int i = 0; i < length; i++) {
-					NBTTag tag = readTagContent(listType, "", depth + 1);
-					if (tag.getTypeId() == TAG_END) {
-						throw new IOException("Invalid TAG_End in TAG_List (not allowed)");
-					}
-					tags.add(tag);
-				}
-				return new ListTag(tagName, listType, tags);
-			}
-			default:
-				throw new IOException("Invalid NBTTag type: " + tagType + " (with name '" + tagName + "')");
+		try {
+			NBTTag nbtTag = NBTTag.forType(tagType).getConstructor(String.class).newInstance(tagName);
+			nbtTag.read(this, in, depth);
+			return nbtTag;
+		} catch (ReflectiveOperationException e) {
+			throw new IOException("Could not instantiate NBTTag class for type " + tagType + "'" + tagName + "'", e);
 		}
 	}
 

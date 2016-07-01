@@ -1,8 +1,10 @@
 package org.inventivetalent.nbt;
 
 import com.google.gson.JsonObject;
+import org.inventivetalent.nbt.stream.NBTInputStream;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -99,6 +101,18 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 			jsonObject.add(entry.getKey(), entry.getValue().asJson());
 		}
 		return jsonObject;
+	}
+
+	@Override
+	public void read(NBTInputStream nbtIn, DataInputStream in, int depth) throws IOException {
+		while (true) {
+			NBTTag tag = nbtIn.readNBTTag(depth + 1);
+			if (tag.getTypeId() == TagID.TAG_END) {
+				break;
+			} else {
+				set(tag.getName(), tag);
+			}
+		}
 	}
 
 	@Override

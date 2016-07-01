@@ -1,14 +1,18 @@
 package org.inventivetalent.nbt;
 
 import com.google.gson.JsonArray;
+import org.inventivetalent.nbt.stream.NBTInputStream;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import static org.inventivetalent.nbt.TagID.TAG_END;
 
 public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 
@@ -91,6 +95,20 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 			jsonArray.add(tag.asJson());
 		}
 		return jsonArray;
+	}
+
+	@Override
+	public void read(NBTInputStream nbtIn, DataInputStream in, int depth) throws IOException {
+		int type = in.readByte();
+		int length = in.readInt();
+		setTagType(type);
+		for (int i = 0; i < length; i++) {
+			NBTTag tag = nbtIn.readTagContent(type, "", depth + 1);
+			if (tag.getTypeId() == TAG_END) {
+				throw new IOException("Invalid TAG_End in TAG_List (not allowed)");
+			}
+			add(tag);
+		}
 	}
 
 	@Override

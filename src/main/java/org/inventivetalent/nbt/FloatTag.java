@@ -1,8 +1,10 @@
 package org.inventivetalent.nbt;
 
 import com.google.gson.JsonPrimitive;
+import org.inventivetalent.nbt.stream.NBTInputStream;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -41,6 +43,11 @@ public class FloatTag extends NumberTag<Float> {
 	@Override
 	public JsonPrimitive asJson() {
 		return new JsonPrimitive(value);
+	}
+
+	@Override
+	public void read(NBTInputStream nbtIn, DataInputStream in, int depth) throws IOException {
+		value = in.readFloat();
 	}
 
 	@Override

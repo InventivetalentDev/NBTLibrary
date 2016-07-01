@@ -3,8 +3,10 @@ package org.inventivetalent.nbt;
 import com.google.common.primitives.Bytes;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonPrimitive;
+import org.inventivetalent.nbt.stream.NBTInputStream;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
@@ -49,6 +51,13 @@ public class ByteArrayTag extends ArrayTag<byte[], Byte> {
 			jsonArray.add(new JsonPrimitive(b));
 		}
 		return jsonArray;
+	}
+
+	@Override
+	public void read(NBTInputStream nbtIn, DataInputStream in, int depth) throws IOException {
+		byte[] bytes = new byte[in.readInt()];
+		in.readFully(bytes);
+		value = bytes;
 	}
 
 	@Override
