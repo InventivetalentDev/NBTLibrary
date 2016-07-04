@@ -15,4 +15,51 @@ public class TagID {
 	public static final int TAG_COMPOUND   = 10;
 	public static final int TAG_INT_ARRAY  = 11;
 
+	public static int forClass(Class<? extends NBTTag> clazz) {
+		return forName(clazz.getSimpleName());
+	}
+
+	public static int forName(String name) {
+		switch (name) {
+			case "ByteArrayTag":
+			case "Tag_Byte_Array":
+				return TAG_BYTE_ARRAY;
+			case "ByteTag":
+			case "Tag_Byte":
+				return TAG_BYTE;
+			case "CompoundTag":
+			case "TAG_Compound":
+				return TAG_COMPOUND;
+			case "DoubleTag":
+			case "TAG_Double":
+				return TAG_DOUBLE;
+			case "EndTag":
+			case "TAG_End":
+				return TAG_END;
+			case "FloatTag":
+			case "TAG_Float":
+				return TAG_FLOAT;
+			case "IntArrayTag":
+			case "TAG_Int_Array":
+				return TAG_INT_ARRAY;
+			case "IntTag":
+			case "TAG_Int":
+				return TAG_INT;
+			case "ListTag":
+			case "TAG_List":
+				return TAG_LIST;
+			case "LongTag":
+			case "TAG_Long":
+				return TAG_LONG;
+			case "ShortTag":
+			case "TAG_Short":
+				return TAG_SHORT;
+			case "StringTag":
+			case "TAG_String":
+				return TAG_STRING;
+			default:
+				throw new IllegalArgumentException("Invalid NBTTag name: " + name);
+		}
+	}
+
 }
