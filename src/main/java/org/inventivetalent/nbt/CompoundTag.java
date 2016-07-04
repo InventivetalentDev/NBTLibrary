@@ -115,6 +115,24 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		return null;
 	}
 
+	public CompoundTag getCompound(String name) {
+		NBTTag tag = get(name);
+		if (tag == null) { return null; }
+		if (tag instanceof CompoundTag) {
+			return (CompoundTag) tag;
+		}
+		return null;
+	}
+
+	public ListTag getList(String name) {
+		NBTTag tag = get(name);
+		if (tag == null) { return null; }
+		if (tag instanceof ListTag) {
+			return (ListTag) tag;
+		}
+		return null;
+	}
+
 	@Override
 	public JsonObject asJson() {
 		JsonObject jsonObject = new JsonObject();
