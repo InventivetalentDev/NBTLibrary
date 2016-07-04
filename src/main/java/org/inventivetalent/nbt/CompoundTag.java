@@ -98,6 +98,23 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		return value.containsKey(name);
 	}
 
+	public String getString(String name) {
+		NBTTag tag = get(name);
+		if (tag == null) { return null; }
+		Object value = tag.getValue();
+		if (value == null) { return null; }
+		return value.toString();
+	}
+
+	public Number getNumber(String name) {
+		NBTTag tag = get(name);
+		if (tag == null) { return null; }
+		if (tag instanceof NumberTag) {
+			return ((NumberTag) tag).getValue();
+		}
+		return null;
+	}
+
 	@Override
 	public JsonObject asJson() {
 		JsonObject jsonObject = new JsonObject();
