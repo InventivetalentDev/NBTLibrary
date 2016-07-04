@@ -14,10 +14,10 @@ import java.util.List;
 
 import static org.inventivetalent.nbt.TagID.TAG_END;
 
-public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
+public class ListTag<V extends NBTTag> extends NBTTag<List<V>> implements Iterable<V> {
 
-	private       int          tagType;
-	private final List<NBTTag> value;
+	private       int     tagType;
+	private final List<V> value;
 
 	public ListTag() {
 		super("");
@@ -30,10 +30,10 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 	}
 
 	public ListTag(int tagType) {
-		this(tagType, new ArrayList<NBTTag>());
+		this(tagType, new ArrayList<V>());
 	}
 
-	public ListTag(int tagType, List<NBTTag> value) {
+	public ListTag(int tagType, List<V> value) {
 		super("");
 		this.tagType = tagType;
 		this.value = value;
@@ -45,7 +45,7 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 		this.value = new ArrayList<>();
 	}
 
-	public ListTag(String name, int tagType, List<NBTTag> value) {
+	public ListTag(String name, int tagType, List<V> value) {
 		super(name);
 		this.tagType = tagType;
 		this.value = new ArrayList<>(value);
@@ -60,30 +60,30 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 	}
 
 	@Override
-	public List<NBTTag> getValue() {
+	public List<V> getValue() {
 		return value;
 	}
 
 	@Override
-	public void setValue(List<NBTTag> value) {
+	public void setValue(List<V> value) {
 		this.value.addAll(value);
 	}
 
-	public NBTTag get(int index) {
+	public V get(int index) {
 		return value.get(index);
 	}
 
-	public void add(NBTTag tag) {
+	public void add(V tag) {
 		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type (List: " + getTagType() + ", Tag: " + tag.getTypeId() + ")"); }
 		value.add(tag);
 	}
 
-	public void add(int index, NBTTag tag) {
+	public void add(int index, V tag) {
 		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type (List: " + getTagType() + ", Tag: " + tag.getTypeId() + ")"); }
 		value.add(index, tag);
 	}
 
-	public void set(int index, NBTTag tag) {
+	public void set(int index, V tag) {
 		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type (List: " + getTagType() + ", Tag: " + tag.getTypeId() + ")"); }
 		value.set(index, tag);
 	}
@@ -107,7 +107,7 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 			if (tag.getTypeId() == TAG_END) {
 				throw new IOException("Invalid TAG_End in TAG_List (not allowed)");
 			}
-			add(tag);
+			add((V) tag);
 		}
 	}
 
@@ -131,7 +131,7 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 	}
 
 	@Override
-	public Iterator<NBTTag> iterator() {
+	public Iterator<V> iterator() {
 		return value.iterator();
 	}
 
@@ -156,7 +156,7 @@ public class ListTag extends NBTTag<List<NBTTag>> implements Iterable<NBTTag> {
 		for (Object o : nmsList) {
 			NBTTag nbtTag = NBTTag.forType(typeId).newInstance();
 			if (nbtTag.getTypeId() == TagID.TAG_END) { continue; }
-			add(nbtTag.fromNMS(o));
+			add((V) nbtTag.fromNMS(o));
 		}
 		return this;
 	}
