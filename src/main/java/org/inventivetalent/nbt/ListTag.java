@@ -88,6 +88,10 @@ public class ListTag<V extends NBTTag> extends NBTTag<List<V>> implements Iterab
 		value.set(index, tag);
 	}
 
+	public int size() {
+		return value.size();
+	}
+
 	@Override
 	public JsonArray asJson() {
 		JsonArray jsonArray = new JsonArray();
