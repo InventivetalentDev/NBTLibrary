@@ -133,6 +133,14 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		return null;
 	}
 
+	public <V extends NBTTag> ListTag<V> getList(String name, Class<V> type) {
+		ListTag list=getList(name);
+		if (list.getTagType() != TagID.forClass(type)) {
+			throw new IllegalArgumentException("ListTag(" + name + ") is not of type " + type.getSimpleName());
+		}
+		return (ListTag<V>) list;
+	}
+
 	@Override
 	public JsonObject asJson() {
 		JsonObject jsonObject = new JsonObject();
