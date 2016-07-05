@@ -8,6 +8,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -148,6 +149,15 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 			throw new IllegalArgumentException("ListTag(" + name + ") is not of type " + type.getSimpleName());
 		}
 		return (ListTag<V>) list;
+	}
+
+	public <V extends NBTTag> ListTag<V> getOrCreateList(String name, Class<V> type) {
+		if (has(name)) {
+			return getList(name, type);
+		}
+		ListTag<V> listTag = new ListTag<>(name, TagID.forClass(type), new ArrayList<V>());
+		set(name, listTag);
+		return listTag;
 	}
 
 	@Override
