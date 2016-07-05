@@ -124,6 +124,15 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		return null;
 	}
 
+	public CompoundTag getOrCreateCompound(String name) {
+		if (has(name)) {
+			return getCompound(name);
+		}
+		CompoundTag compoundTag = new CompoundTag(name);
+		set(name, compoundTag);
+		return compoundTag;
+	}
+
 	public ListTag getList(String name) {
 		NBTTag tag = get(name);
 		if (tag == null) { return null; }
@@ -134,7 +143,7 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 	}
 
 	public <V extends NBTTag> ListTag<V> getList(String name, Class<V> type) {
-		ListTag list=getList(name);
+		ListTag list = getList(name);
 		if (list.getTagType() != TagID.forClass(type)) {
 			throw new IllegalArgumentException("ListTag(" + name + ") is not of type " + type.getSimpleName());
 		}
