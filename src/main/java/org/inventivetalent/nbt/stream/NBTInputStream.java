@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.zip.GZIPInputStream;
+import java.util.zip.ZipException;
 
 import static org.inventivetalent.nbt.TagID.TAG_END;
 
@@ -30,6 +31,14 @@ public class NBTInputStream implements AutoCloseable {
 
 	public NBTInputStream(DataInputStream dataInputStream) {
 		this.in = dataInputStream;
+	}
+
+	public static NBTInputStream optionalGzip(InputStream inputStream) throws IOException {
+		try {
+			return new NBTInputStream(new DataInputStream(new GZIPInputStream(inputStream)));
+		} catch (ZipException e) {
+			return new NBTInputStream(new DataInputStream(inputStream));
+		}
 	}
 
 	public NBTTag readNBTTag() throws IOException {
