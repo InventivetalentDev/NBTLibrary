@@ -116,6 +116,15 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		return null;
 	}
 
+	public boolean getBoolean(String name) {
+		NBTTag tag = get(name);
+		if (tag == null) { return false; }
+		if (tag instanceof ByteTag) {
+			return ((ByteTag) tag).getValue() == 1;
+		}
+		return false;
+	}
+
 	public CompoundTag getCompound(String name) {
 		NBTTag tag = get(name);
 		if (tag == null) { return null; }
