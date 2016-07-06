@@ -64,4 +64,9 @@ public class EndTag extends NBTTag<Void> {
 		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
 		return clazz.newInstance();
 	}
+
+	@Override
+	public String toString() {
+		return "TAG_End";
+	}
 }
