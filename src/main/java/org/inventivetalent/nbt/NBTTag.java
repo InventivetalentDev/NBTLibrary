@@ -28,7 +28,7 @@ public abstract class NBTTag<V> {
 
 	}
 
-	public static NBTTag createTpe(int type) throws IllegalAccessException, InstantiationException {
+	public static NBTTag createType(int type) throws IllegalAccessException, InstantiationException {
 		return forType(type).newInstance();
 	}
 
