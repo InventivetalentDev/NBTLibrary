@@ -9,4 +9,9 @@ public abstract class NumberTag<V extends Number> extends NBTTag<V> {
 	public V getValue() {
 		return null;
 	}
+
+	@Override
+	public Number getAsNumber() {
+		return getValue();
+	}
 }

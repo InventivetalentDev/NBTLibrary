@@ -33,7 +33,7 @@ public abstract class NBTTag<V> {
 		return forType(type).newInstance();
 	}
 
-	public static NBTTag createType(int type,String name) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+	public static NBTTag createType(int type, String name) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
 		return forType(type).getConstructor(String.class).newInstance(name);
 	}
 
@@ -75,6 +75,42 @@ public abstract class NBTTag<V> {
 	public abstract V getValue();
 
 	public abstract void setValue(V v);
+
+	// getAs methods
+
+	public Number getAsNumber() {
+		return 0;
+	}
+
+	public byte getAsByte() {
+		return getAsNumber().byteValue();
+	}
+
+	public short getAsShort() {
+		return getAsNumber().shortValue();
+	}
+
+	public int getAsInt() {
+		return getAsNumber().intValue();
+	}
+
+	public long getAsLong() {
+		return getAsNumber().longValue();
+	}
+
+	public float getAsFloat() {
+		return getAsNumber().floatValue();
+	}
+
+	public double getAsDouble() {
+		return getAsNumber().doubleValue();
+	}
+
+	public String getAsString() {
+		return String.valueOf(getValue());
+	}
+
+	// /getAs methods
 
 	public abstract JsonElement asJson();
 

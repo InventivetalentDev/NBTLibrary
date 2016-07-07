@@ -37,6 +37,41 @@ public class StringTag extends NBTTag<String> {
 	}
 
 	@Override
+	public String getAsString() {
+		return value;
+	}
+
+	@Override
+	public byte getAsByte() {
+		return Byte.parseByte(value);
+	}
+
+	@Override
+	public short getAsShort() {
+		return Short.parseShort(value);
+	}
+
+	@Override
+	public int getAsInt() {
+		return Integer.parseInt(value);
+	}
+
+	@Override
+	public long getAsLong() {
+		return Long.parseLong(value);
+	}
+
+	@Override
+	public float getAsFloat() {
+		return Float.parseFloat(value);
+	}
+
+	@Override
+	public double getAsDouble() {
+		return Double.parseDouble(value);
+	}
+
+	@Override
 	public JsonPrimitive asJson() {
 		return new JsonPrimitive(value);
 	}
