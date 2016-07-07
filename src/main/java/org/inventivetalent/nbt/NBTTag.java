@@ -10,6 +10,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 
 import static org.inventivetalent.nbt.TagID.*;
 
@@ -30,6 +31,10 @@ public abstract class NBTTag<V> {
 
 	public static NBTTag createType(int type) throws IllegalAccessException, InstantiationException {
 		return forType(type).newInstance();
+	}
+
+	public static NBTTag createType(int type,String name) throws IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
+		return forType(type).getConstructor(String.class).newInstance(name);
 	}
 
 	public static Class<? extends NBTTag> forType(int type) {
