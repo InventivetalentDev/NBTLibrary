@@ -19,6 +19,37 @@ public class TagID {
 		return forName(clazz.getSimpleName());
 	}
 
+	public static int forValueClass(Class<?> clazz) {
+		if (byte.class.isAssignableFrom(clazz) || boolean.class.isAssignableFrom(clazz)) {
+			return TAG_BYTE;
+		}
+		if (short.class.isAssignableFrom(clazz)) {
+			return TAG_SHORT;
+		}
+		if (int.class.isAssignableFrom(clazz)) {
+			return TAG_INT;
+		}
+		if (long.class.isAssignableFrom(clazz)) {
+			return TAG_LONG;
+		}
+		if (float.class.isAssignableFrom(clazz)) {
+			return TAG_FLOAT;
+		}
+		if (double.class.isAssignableFrom(clazz)) {
+			return TAG_DOUBLE;
+		}
+		if (String.class.isAssignableFrom(clazz)) {
+			return TAG_STRING;
+		}
+		if (byte[].class.isAssignableFrom(clazz)) {
+			return TAG_BYTE_ARRAY;
+		}
+		if (int[].class.isAssignableFrom(clazz)) {
+			return TAG_INT_ARRAY;
+		}
+		return -1;
+	}
+
 	public static int forName(String name) {
 		switch (name) {
 			case "ByteArrayTag":
