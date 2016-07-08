@@ -56,7 +56,7 @@ public class TagID {
 		if (Map.class.isAssignableFrom(clazz)) {
 			return TAG_COMPOUND;
 		}
-		return -1;
+		return forName(clazz.getSimpleName());
 	}
 
 	public static int forName(String name) {
