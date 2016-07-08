@@ -15,7 +15,11 @@ public abstract class NBTMember extends NBTInfo {
 
 	public abstract NBTTag write(NBTTag tag);
 
-	protected Object fromNbtValue(Object nbt, Class<?> targetType) {
+	protected Object fromNbtValue(NBTTag tag, Class<?> targetType) {
+		if (NBTTag.class.isAssignableFrom(targetType)) {
+			return tag;
+		}
+		Object nbt = tag.getValue();
 		if (boolean.class.isAssignableFrom(targetType)) {
 			if (nbt instanceof Boolean) {
 				return (boolean) nbt;

@@ -16,7 +16,7 @@ public class NBTField extends NBTMember {
 	@Override
 	public void read(NBTTag tag) {
 		try {
-			field.set(this.obj, fromNbtValue(tag.getValue(), field.getType()));
+			field.set(this.obj, fromNbtValue(tag, field.getType()));
 		} catch (IllegalAccessException e) {
 			throw new RuntimeException(e);
 		}

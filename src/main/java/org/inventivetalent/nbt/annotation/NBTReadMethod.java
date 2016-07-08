@@ -28,7 +28,7 @@ public class NBTReadMethod extends NBTMember {
 				//TODO: check if the parameter length == 1
 				paramTag = tag;
 			}
-			args[i] = paramTag == null ? null : fromNbtValue(paramTag.getValue(), parameters[i].parameter.getType());
+			args[i] = paramTag == null ? null : fromNbtValue(paramTag, parameters[i].parameter.getType());
 		}
 		try {
 			method.invoke(this.obj, args);
