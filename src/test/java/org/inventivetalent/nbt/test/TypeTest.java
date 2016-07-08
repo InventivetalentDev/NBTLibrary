@@ -23,6 +23,21 @@ public class TypeTest {
 	}
 
 	@Test
+	public void idForValueClassTest() {
+		assertEquals(TagID.TAG_BYTE, TagID.forValueClass(byte.class));
+		assertEquals(TagID.TAG_BYTE, TagID.forValueClass(Byte.class));
+
+		assertEquals(TagID.TAG_LONG, TagID.forValueClass(long.class));
+		assertEquals(TagID.TAG_LONG, TagID.forValueClass(Long.class));
+
+		assertEquals(TagID.TAG_BYTE_ARRAY, TagID.forValueClass(byte[].class));
+		assertEquals(TagID.TAG_BYTE_ARRAY, TagID.forValueClass(Byte[].class));
+
+		assertEquals(TagID.TAG_INT_ARRAY, TagID.forValueClass(int[].class));
+		assertEquals(TagID.TAG_INT_ARRAY, TagID.forValueClass(Integer[].class));
+	}
+
+	@Test
 	public void classForIdTest() {
 		assertEquals(DoubleTag.class, NBTTag.forType(TagID.TAG_DOUBLE));
 		assertEquals(CompoundTag.class, NBTTag.forType(TagID.TAG_COMPOUND));
