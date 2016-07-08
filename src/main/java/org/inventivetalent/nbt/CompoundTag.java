@@ -95,6 +95,10 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		set(name, (byte) (b ? 1 : 0));
 	}
 
+	public <T extends Enum<T>> void set(String name, T enm) {
+		set(name, enm.name());
+	}
+
 	public boolean has(String name) {
 		return value.containsKey(name);
 	}
@@ -167,6 +171,12 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		ListTag<V> listTag = new ListTag<>(name, TagID.forClass(type), new ArrayList<V>());
 		set(name, listTag);
 		return listTag;
+	}
+
+	public <T extends Enum<T>> T getEnum(String name, Class<T> clazz) {
+		String string = getString(name);
+		if (string == null) { return null; }
+		return Enum.valueOf(clazz, string);
 	}
 
 	@Override
