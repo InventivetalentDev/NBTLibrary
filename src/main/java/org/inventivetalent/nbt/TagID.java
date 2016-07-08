@@ -1,5 +1,8 @@
 package org.inventivetalent.nbt;
 
+import java.util.List;
+import java.util.Map;
+
 public class TagID {
 
 	public static final int TAG_END        = 0;
@@ -46,6 +49,12 @@ public class TagID {
 		}
 		if (int[].class.isAssignableFrom(clazz) || Integer[].class.isAssignableFrom(clazz)) {
 			return TAG_INT_ARRAY;
+		}
+		if (List.class.isAssignableFrom(clazz)) {
+			return TAG_LIST;
+		}
+		if (Map.class.isAssignableFrom(clazz)) {
+			return TAG_COMPOUND;
 		}
 		return -1;
 	}
