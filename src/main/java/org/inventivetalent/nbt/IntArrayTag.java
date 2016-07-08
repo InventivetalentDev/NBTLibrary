@@ -3,6 +3,7 @@ package org.inventivetalent.nbt;
 import com.google.common.primitives.Ints;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonPrimitive;
+import org.apache.commons.lang.ArrayUtils;
 import org.inventivetalent.nbt.stream.NBTInputStream;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
@@ -11,6 +12,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 
 public class IntArrayTag extends ArrayTag<int[], Integer> {
 
@@ -32,6 +34,11 @@ public class IntArrayTag extends ArrayTag<int[], Integer> {
 	public IntArrayTag(String name, int[] value) {
 		super(name);
 		this.value = value;
+	}
+
+	public IntArrayTag(String name, List<Integer> list) {
+		super(name);
+		this.value = ArrayUtils.toPrimitive(list.toArray(new Integer[list.size()]));
 	}
 
 	@Override

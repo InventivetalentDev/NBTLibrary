@@ -3,6 +3,7 @@ package org.inventivetalent.nbt;
 import com.google.common.primitives.Bytes;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonPrimitive;
+import org.apache.commons.lang.ArrayUtils;
 import org.inventivetalent.nbt.stream.NBTInputStream;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 
@@ -10,6 +11,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Iterator;
 
 public class ByteArrayTag extends ArrayTag<byte[], Byte> {
@@ -32,6 +34,11 @@ public class ByteArrayTag extends ArrayTag<byte[], Byte> {
 	public ByteArrayTag(String name, byte[] value) {
 		super(name);
 		this.value = value;
+	}
+
+	public ByteArrayTag(String name, Collection<Byte> list) {
+		super(name);
+		this.value = ArrayUtils.toPrimitive(list.toArray(new Byte[list.size()]));
 	}
 
 	@Override
