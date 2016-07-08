@@ -20,31 +20,31 @@ public class TagID {
 	}
 
 	public static int forValueClass(Class<?> clazz) {
-		if (byte.class.isAssignableFrom(clazz) || boolean.class.isAssignableFrom(clazz)) {
+		if (byte.class.isAssignableFrom(clazz) || Byte.class.isAssignableFrom(clazz) || boolean.class.isAssignableFrom(clazz)) {
 			return TAG_BYTE;
 		}
-		if (short.class.isAssignableFrom(clazz)) {
+		if (short.class.isAssignableFrom(clazz) || Short.class.isAssignableFrom(clazz)) {
 			return TAG_SHORT;
 		}
-		if (int.class.isAssignableFrom(clazz)) {
+		if (int.class.isAssignableFrom(clazz) || Integer.class.isAssignableFrom(clazz)) {
 			return TAG_INT;
 		}
-		if (long.class.isAssignableFrom(clazz)) {
+		if (long.class.isAssignableFrom(clazz) || Long.class.isAssignableFrom(clazz)) {
 			return TAG_LONG;
 		}
-		if (float.class.isAssignableFrom(clazz)) {
+		if (float.class.isAssignableFrom(clazz) || Float.class.isAssignableFrom(clazz)) {
 			return TAG_FLOAT;
 		}
-		if (double.class.isAssignableFrom(clazz)) {
+		if (double.class.isAssignableFrom(clazz) || Double.class.isAssignableFrom(clazz)) {
 			return TAG_DOUBLE;
 		}
 		if (String.class.isAssignableFrom(clazz)) {
 			return TAG_STRING;
 		}
-		if (byte[].class.isAssignableFrom(clazz)) {
+		if (byte[].class.isAssignableFrom(clazz) || Byte[].class.isAssignableFrom(clazz)) {
 			return TAG_BYTE_ARRAY;
 		}
-		if (int[].class.isAssignableFrom(clazz)) {
+		if (int[].class.isAssignableFrom(clazz) || Integer[].class.isAssignableFrom(clazz)) {
 			return TAG_INT_ARRAY;
 		}
 		return -1;
