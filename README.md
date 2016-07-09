@@ -7,14 +7,16 @@ Library for reading, writing and manipulating NBT data
 ## Maven
 ```xml
 <repositories>
-	<repository>
-		<id>inventive-repo</id>
-		<url>https://repo.inventivetalent.org/content/groups/public/</url>
-	</repository>
+    <repository>
+        <id>inventive-repo</id>
+        <url>https://repo.inventivetalent.org/content/groups/public/</url>
+    </repository>
 </repositories>
-<dependency>
-  <groupId>org.inventivetalent</groupId>
-  <artifactId>nbt-lib</artifactId>
-  <version>VERSION</version>
-</dependency>
+<dependencies>
+    <dependency>
+        <groupId>org.inventivetalent</groupId>
+        <artifactId>nbt-lib</artifactId>
+        <version>VERSION</version>
+    </dependency>
+</dependencies>
 ```
