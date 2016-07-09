@@ -41,7 +41,7 @@ public class NBTOutputStream implements AutoCloseable {
 		writeTagContent(tag);
 	}
 
-	public void writeTagContent(NBTTag tag) throws IOException {
+	private void writeTagContent(NBTTag tag) throws IOException {
 		tag.write(this, out);
 	}
 
