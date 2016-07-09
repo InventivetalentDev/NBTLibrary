@@ -45,7 +45,7 @@ public class NBTInputStream implements AutoCloseable {
 		return readNBTTag(0);
 	}
 
-	private NBTTag readNBTTag(int depth) throws IOException {
+	public NBTTag readNBTTag(int depth) throws IOException {
 		int tagType = in.readByte() & 0xFF;
 		String tagName = "";
 		if (tagType != TAG_END) {
@@ -58,7 +58,7 @@ public class NBTInputStream implements AutoCloseable {
 		return readTagContent(tagType, tagName, depth);
 	}
 
-	private NBTTag readTagContent(int tagType, String tagName, int depth) throws IOException {
+	public NBTTag readTagContent(int tagType, String tagName, int depth) throws IOException {
 		try {
 			NBTTag nbtTag = NBTTag.forType(tagType).getConstructor(String.class).newInstance(tagName);
 			nbtTag.read(this, in, depth);
