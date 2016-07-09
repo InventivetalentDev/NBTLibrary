@@ -9,6 +9,7 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <build>
+        <finalName>NBTLibrary_v${project.version}</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
