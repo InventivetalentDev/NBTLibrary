@@ -17,7 +17,7 @@ public @interface NBT {
 	 *
 	 * @return NBT path
 	 */
-	String[] value() default "";
+	String[] value() default {};
 
 	/**
 	 * Type of this NBT value
