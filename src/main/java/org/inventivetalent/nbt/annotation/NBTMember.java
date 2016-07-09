@@ -34,6 +34,9 @@ public abstract class NBTMember extends NBTInfo {
 	}
 
 	protected Object toNbtValue(Object original, Class<?> sourceType) {
+		if (NBTTag.class.isAssignableFrom(sourceType)) {
+			return ((NBTTag) original).getValue();
+		}
 		if (boolean.class.isAssignableFrom(sourceType)) {
 			return (byte) ((boolean) original ? 1 : 0);
 		} else {
