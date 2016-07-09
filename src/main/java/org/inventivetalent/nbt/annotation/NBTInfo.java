@@ -3,7 +3,7 @@ package org.inventivetalent.nbt.annotation;
 import lombok.Data;
 
 @Data
-public class NBTInfo {
+public class NBTInfo implements Comparable<NBTInfo> {
 
 	protected final String[]    key;
 	protected final int         type;
@@ -11,4 +11,8 @@ public class NBTInfo {
 	protected final boolean     write;
 	protected final NBTPriority priority;
 
+	@Override
+	public int compareTo(NBTInfo o) {
+		return priority.ordinal() - o.priority.ordinal();
+	}
 }
