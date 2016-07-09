@@ -23,6 +23,7 @@ public @interface NBT {
 	 * Type of this NBT value
 	 *
 	 * @return NBT type
+	 * @see org.inventivetalent.nbt.TagID
 	 */
 	int type() default -1;
 
