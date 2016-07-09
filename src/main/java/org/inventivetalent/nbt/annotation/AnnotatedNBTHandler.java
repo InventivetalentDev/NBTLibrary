@@ -7,13 +7,14 @@ import org.inventivetalent.nbt.TagID;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class AnnotatedNBTHandler {
 
 	private final Object toHandle;
-	private final Set<NBTMember> members = new HashSet<>();
+	private final List<NBTMember> members = new ArrayList<>();
 
 	public AnnotatedNBTHandler(Object toHandle) {
 		this(toHandle, true);
@@ -111,6 +112,7 @@ public class AnnotatedNBTHandler {
 				}
 			}
 		}
+		Collections.sort(members);
 	}
 
 	public void onRead(CompoundTag compoundTag) {
