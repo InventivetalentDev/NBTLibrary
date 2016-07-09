@@ -9,8 +9,8 @@ public class NBTParameter extends NBTMember {
 
 	protected final Parameter parameter;
 
-	public NBTParameter(String[] key, int type, boolean read, boolean write, Method method, Parameter parameter) {
-		super(key, type, read, write, method);
+	public NBTParameter(String[] key, int type, boolean read, boolean write, NBTPriority priority, Method method, Parameter parameter) {
+		super(key, type, read, write, priority, method);
 		this.parameter = parameter;
 	}
 

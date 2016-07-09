@@ -8,8 +8,8 @@ public class NBTWriteMethod extends NBTMember {
 
 	protected final Method method;
 
-	public NBTWriteMethod(String[] key, int type, boolean write, Object obj, Method method) {
-		super(key, type, false, write, obj);
+	public NBTWriteMethod(String[] key, int type, boolean write, NBTPriority priority, Object obj, Method method) {
+		super(key, type, false, write, priority, obj);
 		this.method = method;
 	}
 

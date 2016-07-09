@@ -11,8 +11,8 @@ public class NBTReadMethod extends NBTMember {
 	private final Method         method;
 	private final NBTParameter[] parameters;
 
-	public NBTReadMethod(String[] key, int type, boolean read, Object obj, Method method, NBTParameter[] parameters) {
-		super(key, type, read, false, obj);
+	public NBTReadMethod(String[] key, int type, boolean read, NBTPriority priority, Object obj, Method method, NBTParameter[] parameters) {
+		super(key, type, read, false, priority, obj);
 		this.method = method;
 		this.parameters = parameters;
 	}

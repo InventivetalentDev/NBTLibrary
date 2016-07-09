@@ -41,4 +41,6 @@ public @interface NBT {
 	 */
 	boolean read() default true;
 
+	NBTPriority priority() default NBTPriority.NORMAL;
+
 }

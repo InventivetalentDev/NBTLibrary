@@ -71,8 +71,9 @@ public class AnnotatedNBTHandler {
 				if (type == -1) { type = TagID.forValueClass(field.getType()); }
 				boolean write = annotation.write();
 				boolean read = annotation.read();
+				NBTPriority priority = annotation.priority();
 
-				members.add(new NBTField(key, type, read, write, this.toHandle, field));
+				members.add(new NBTField(key, type, read, write, priority, this.toHandle, field));
 			}
 		}
 
@@ -86,10 +87,11 @@ public class AnnotatedNBTHandler {
 				int type = annotation.type();
 				boolean write = annotation.write();
 				boolean read = annotation.read();
+				NBTPriority priority = annotation.priority();
 
 				if (method.getParameterTypes().length == 0) {// Method that returns the value to write
 					if (type == -1) { type = TagID.forValueClass(method.getReturnType()); }
-					members.add(new NBTWriteMethod(key, type, write, this.toHandle, method));
+					members.add(new NBTWriteMethod(key, type, write, priority, this.toHandle, method));
 				} else {
 					NBTParameter[] nbtParameters = new NBTParameter[method.getParameters().length];
 					for (int i = 0; i < method.getParameters().length; i++) {
@@ -101,10 +103,11 @@ public class AnnotatedNBTHandler {
 						int paramType = paramAnnotation.type();
 						if (paramType == -1) { type = TagID.forValueClass(parameter.getType()); }
 						boolean paramRead = paramAnnotation.read();
+						NBTPriority paramPriority = paramAnnotation.priority();
 
-						nbtParameters[i] = new NBTParameter(/*fullKey*/paramKey, paramType, paramRead, false, method, parameter);
+						nbtParameters[i] = new NBTParameter(/*fullKey*/paramKey, paramType, paramRead, false, paramPriority, method, parameter);
 					}
-					members.add(new NBTReadMethod(key, type, read, this.toHandle, method, nbtParameters));
+					members.add(new NBTReadMethod(key, type, read, priority, this.toHandle, method, nbtParameters));
 				}
 			}
 		}

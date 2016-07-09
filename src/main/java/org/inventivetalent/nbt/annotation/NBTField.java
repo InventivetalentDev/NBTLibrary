@@ -8,8 +8,8 @@ public class NBTField extends NBTMember {
 
 	private final Field field;
 
-	public NBTField(String[] key, int type, boolean read, boolean write, Object obj, Field field) {
-		super(key, type, read, write, obj);
+	public NBTField(String[] key, int type, boolean read, boolean write, NBTPriority priority, Object obj, Field field) {
+		super(key, type, read, write, priority, obj);
 		this.field = field;
 	}
 

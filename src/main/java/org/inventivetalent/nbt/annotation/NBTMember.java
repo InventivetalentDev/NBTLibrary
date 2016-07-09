@@ -6,8 +6,8 @@ public abstract class NBTMember extends NBTInfo {
 
 	protected final Object obj;
 
-	public NBTMember(String[] key, int type, boolean read, boolean write, Object obj) {
-		super(key, type, read, write);
+	public NBTMember(String[] key, int type, boolean read, boolean write, NBTPriority priority, Object obj) {
+		super(key, type, read, write, priority);
 		this.obj = obj;
 	}
 
