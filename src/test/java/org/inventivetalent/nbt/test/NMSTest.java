@@ -24,7 +24,7 @@ public class NMSTest {
 			public Class resolve(String... names) throws ClassNotFoundException {
 				for (int i = 0; i < names.length; ++i) {
 					if (!names[i].startsWith("net.minecraft.server")) {
-						names[i] = "net.minecraft.server.v1_10_R1." + names[i];
+						names[i] = "net.minecraft.server.v1_9_R2." + names[i];
 					}
 				}
 
