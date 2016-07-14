@@ -1,6 +1,6 @@
 package org.inventivetalent.nbt.test;
 
-import net.minecraft.server.v1_10_R1.NBTTagCompound;
+import net.minecraft.server.v1_9_R2.NBTTagCompound;
 import org.inventivetalent.nbt.CompoundTag;
 import org.inventivetalent.nbt.NBTTag;
 import org.inventivetalent.nbt.TagID;
