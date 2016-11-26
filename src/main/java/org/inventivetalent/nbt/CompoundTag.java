@@ -215,7 +215,7 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 
 	@Override
 	public String getTypeName() {
-		return "TAG_Compund";
+		return "TAG_Compound";
 	}
 
 	@Override
