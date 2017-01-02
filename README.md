@@ -1,6 +1,6 @@
 # NBTLibrary
 
-[![Build Status](http://ci.inventivetalent.org/job/NBTLibrary/badge/icon)](http://ci.inventivetalent.org/job/NBTLibrary/)
+[![Build Status](https://travis-ci.org/InventivetalentDev/NBTInjector.svg?branch=master)](https://travis-ci.org/InventivetalentDev/NBTInjector)
 
 Library for reading, writing and manipulating NBT data
 
