@@ -31,7 +31,7 @@
 
         <dependency>
             <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
+            <artifactId>spigot-api</artifactId>
             <version>1.9.4-R0.1-SNAPSHOT</version>
         </dependency>
 
@@ -60,5 +60,15 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>sonatype-nexus-releases</id>
+            <url>http://repo.inventivetalent.org/content/repositories/releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <url>http://repo.inventivetalent.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
 </project>
