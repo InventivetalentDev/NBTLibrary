@@ -1,8 +1,9 @@
+sudo: false
 language: java
 jdk:
 - oraclejdk8
 
-script: "mvn deploy --settings settings.xml"
+script: "mvn clean package deploy --settings settings.xml"
 env:
   global:
   - secure: "gOc0HFbNHYhR6i9QyoDZpg1x8I03U7C6ac5EBdli9AL7//VbETY77EN9VP0V4ae7Ua3iyyyzIyb+xoMoSSNiYDpZJJCkuHiFA9wMLL5itQG/A20XukttgU/gqRkRzfl+TsNbXLBRwZz3aUbrXoSTsQhkXF6NxYXuFkHWxMY1CAtcCRbA3e3XbMQw0Fiv0IjxazkGZIJ3izlwL8Q5FiW1rhSqiq9e/E2/0kM/XQyxxL2vXWp9k/upRTg+QFY/OusGZlzI5rJGPT3MzEMDSPZ/bcAbWvlVStoQbHhl7syzbaVCJ8tlhrxyS6mKw9RFQ7EyglEubQOPhUu62R8LiPjSkm3piUFinGn0Kj+EBz5hsbNeDMKNWwU8TfDIIpaV0+lUCDzo5uZXjmyMj5fmzywPAJRgICnyVBcWxUYSSB+mTkDxO6Z81ocjoaLpgfrhRns1rIgnI37kprI2EtO+0JoroIplTwNzWbeQ90JqsLameeRp8gF3VNoLNs5noDGSVJk/wpaImOeJkm4/8z7HJTGXEytXR06oBI1fuEUppjtCpTSUEI26JVlTM9x5CJ/ym9vzy1jL2fFJDVSe4f/krUF8maUwwpBJdXyQ6KNoSCvxrYT1kNYdPAwzWsjAblw0o2GImnduHSp8xx/lutedRMaFvN6Ph6GgMYAlk3nlBXPBqU4="

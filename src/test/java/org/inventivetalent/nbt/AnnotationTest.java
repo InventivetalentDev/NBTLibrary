@@ -1,7 +1,5 @@
-package org.inventivetalent.nbt.test;
+package org.inventivetalent.nbt;
 
-import org.inventivetalent.nbt.CompoundTag;
-import org.inventivetalent.nbt.ListTag;
 import org.inventivetalent.nbt.annotation.AnnotatedNBTHandler;
 import org.inventivetalent.nbt.annotation.NBT;
 import org.inventivetalent.nbt.stream.NBTInputStream;

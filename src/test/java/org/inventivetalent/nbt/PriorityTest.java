@@ -1,4 +1,4 @@
-package org.inventivetalent.nbt.test;
+package org.inventivetalent.nbt;
 
 import org.inventivetalent.nbt.CompoundTag;
 import org.inventivetalent.nbt.annotation.AnnotatedNBTHandler;
