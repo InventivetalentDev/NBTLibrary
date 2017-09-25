@@ -6,7 +6,7 @@
 
     <groupId>org.inventivetalent</groupId>
     <artifactId>nbt-lib</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
 
     <name>NBTLibrary</name>
     <description>Library for reading, writing and manipulating NBT data</description>
