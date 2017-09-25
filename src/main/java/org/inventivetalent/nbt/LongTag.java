@@ -8,6 +8,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class LongTag extends NumberTag<Long> {
 
 	private long value;
@@ -72,8 +73,12 @@ public class LongTag extends NumberTag<Long> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) { return true; }
-		if (o == null || getClass() != o.getClass()) { return false; }
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		LongTag longTag = (LongTag) o;
 

@@ -4,6 +4,7 @@ import org.inventivetalent.nbt.NBTTag;
 
 import java.lang.reflect.Method;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class NBTWriteMethod extends NBTMember {
 
 	protected final Method method;
@@ -19,6 +20,7 @@ public class NBTWriteMethod extends NBTMember {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public NBTTag write(NBTTag tag) {
 		try {
 			Object value = toNbtValue(method.invoke(this.obj), method.getReturnType());

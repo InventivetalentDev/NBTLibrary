@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import static org.inventivetalent.nbt.TagID.*;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public abstract class NBTTag<V> {
 
 	public static NMSClassResolver NMS_CLASS_RESOLVER = new NMSClassResolver();
@@ -128,6 +129,7 @@ public abstract class NBTTag<V> {
 		return "NBTBase";
 	}
 
+	@SuppressWarnings("unchecked")
 	public NBTTag fromNMS(Object nms) throws ReflectiveOperationException {
 		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
 		Field field = clazz.getDeclaredField("data");
@@ -145,7 +147,9 @@ public abstract class NBTTag<V> {
 				break;
 			}
 		}
-		if (constructor == null) { return null; }
+		if (constructor == null) {
+			return null;
+		}
 		return constructor.newInstance(getValue());
 	}
 

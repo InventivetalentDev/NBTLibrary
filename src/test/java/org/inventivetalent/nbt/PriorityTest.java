@@ -1,6 +1,5 @@
-package org.inventivetalent.nbt.test;
+package org.inventivetalent.nbt;
 
-import org.inventivetalent.nbt.CompoundTag;
 import org.inventivetalent.nbt.annotation.AnnotatedNBTHandler;
 import org.inventivetalent.nbt.annotation.NBT;
 import org.inventivetalent.nbt.annotation.NBTPriority;
@@ -8,6 +7,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class PriorityTest {
 
 	private int c = 0;

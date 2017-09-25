@@ -1,7 +1,6 @@
-package org.inventivetalent.nbt.test;
+package org.inventivetalent.nbt;
 
 import com.google.gson.JsonElement;
-import org.inventivetalent.nbt.NBTTag;
 import org.inventivetalent.nbt.stream.NBTInputStream;
 import org.junit.Test;
 

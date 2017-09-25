@@ -7,9 +7,9 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({
-				ElementType.FIELD,
-				ElementType.METHOD,
-				ElementType.PARAMETER })
+		ElementType.FIELD,
+		ElementType.METHOD,
+		ElementType.PARAMETER})
 public @interface NBT {
 
 	/**

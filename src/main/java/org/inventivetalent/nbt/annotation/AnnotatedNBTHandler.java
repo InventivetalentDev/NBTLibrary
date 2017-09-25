@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class AnnotatedNBTHandler {
 
 	private final Object toHandle;
@@ -34,16 +35,22 @@ public class AnnotatedNBTHandler {
 	}
 
 	static NBTTag digTag(CompoundTag parent, String[] key, int index) {
-		if (key.length == 0) { return parent; }
+		if (key.length == 0) {
+			return parent;
+		}
 		NBTTag tag = parent.get(key[index]);
-		if (tag == null) { return null; }
+		if (tag == null) {
+			return null;
+		}
 		if (tag.getTypeId() != TagID.TAG_COMPOUND) {
 			if (index != key.length - 1) {
 				throw new IllegalStateException("Found non-compound tag before key end (index " + index + "/" + key.length + ")");
 			}
 			return tag;
 		}
-		if (index == key.length - 1) { return tag; }// Return anything (even compound) if we're at the final index
+		if (index == key.length - 1) {
+			return tag;
+		}// Return anything (even compound) if we're at the final index
 		return digTag((CompoundTag) tag, key, index + 1);
 	}
 
@@ -67,9 +74,13 @@ public class AnnotatedNBTHandler {
 				field.setAccessible(true);
 
 				String[] key = annotation.value();
-				if (key == null || key.length == 0) { key = new String[] { field.getName() }; }
+				if (key.length == 0) {
+					key = new String[]{field.getName()};
+				}
 				int type = annotation.type();
-				if (type == -1) { type = TagID.forValueClass(field.getType()); }
+				if (type == -1) {
+					type = TagID.forValueClass(field.getType());
+				}
 				boolean write = annotation.write();
 				boolean read = annotation.read();
 				NBTPriority priority = annotation.priority();
@@ -84,14 +95,18 @@ public class AnnotatedNBTHandler {
 				method.setAccessible(true);
 
 				String[] key = annotation.value();
-				if (key == null || key.length == 0) { key = new String[] { method.getName() }; }
+				if (key.length == 0) {
+					key = new String[]{method.getName()};
+				}
 				int type = annotation.type();
 				boolean write = annotation.write();
 				boolean read = annotation.read();
 				NBTPriority priority = annotation.priority();
 
 				if (method.getParameterTypes().length == 0) {// Method that returns the value to write
-					if (type == -1) { type = TagID.forValueClass(method.getReturnType()); }
+					if (type == -1) {
+						type = TagID.forValueClass(method.getReturnType());
+					}
 					members.add(new NBTWriteMethod(key, type, write, priority, this.toHandle, method));
 				} else {
 					NBTParameter[] nbtParameters = new NBTParameter[method.getParameters().length];
@@ -99,10 +114,14 @@ public class AnnotatedNBTHandler {
 						Parameter parameter = method.getParameters()[i];
 
 						NBT paramAnnotation = parameter.getAnnotation(NBT.class);
-						if (paramAnnotation == null) { throw new IllegalArgumentException("Missing @NBT parameter annotation for @NBT method " + method.getName()); }
+						if (paramAnnotation == null) {
+							throw new IllegalArgumentException("Missing @NBT parameter annotation for @NBT method " + method.getName());
+						}
 						String[] paramKey = paramAnnotation.value();
 						int paramType = paramAnnotation.type();
-						if (paramType == -1) { type = TagID.forValueClass(parameter.getType()); }
+						if (paramType == -1) {
+							type = TagID.forValueClass(parameter.getType());
+						}
 						boolean paramRead = paramAnnotation.read();
 						NBTPriority paramPriority = paramAnnotation.priority();
 
@@ -119,7 +138,9 @@ public class AnnotatedNBTHandler {
 		for (NBTMember member : members) {
 			if (member.read) {
 				NBTTag tag = digTag(compoundTag, member.key, 0);
-				if (tag != null) { member.read(tag); }
+				if (tag != null) {
+					member.read(tag);
+				}
 			}
 		}
 	}

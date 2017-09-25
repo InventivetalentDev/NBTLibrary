@@ -2,6 +2,7 @@ package org.inventivetalent.nbt.annotation;
 
 import org.inventivetalent.nbt.NBTTag;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public abstract class NBTMember extends NBTInfo {
 
 	protected final Object obj;
@@ -22,12 +23,9 @@ public abstract class NBTMember extends NBTInfo {
 		Object nbt = tag.getValue();
 		if (boolean.class.isAssignableFrom(targetType)) {
 			if (nbt instanceof Boolean) {
-				return (boolean) nbt;
+				return nbt;
 			}
-			if (nbt instanceof Byte) {
-				return ((byte) nbt) == 1;
-			}
-			return false;
+			return nbt instanceof Byte && ((byte) nbt) == 1;
 		} else {
 			return nbt;
 		}

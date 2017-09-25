@@ -1,6 +1,5 @@
-package org.inventivetalent.nbt.test;
+package org.inventivetalent.nbt;
 
-import org.inventivetalent.nbt.*;
 import org.inventivetalent.nbt.stream.NBTInputStream;
 import org.inventivetalent.nbt.stream.NBTOutputStream;
 import org.junit.Test;

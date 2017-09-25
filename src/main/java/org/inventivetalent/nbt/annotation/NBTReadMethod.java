@@ -6,9 +6,10 @@ import org.inventivetalent.nbt.TagID;
 
 import java.lang.reflect.Method;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class NBTReadMethod extends NBTMember {
 
-	private final Method         method;
+	private final Method method;
 	private final NBTParameter[] parameters;
 
 	public NBTReadMethod(String[] key, int type, boolean read, NBTPriority priority, Object obj, Method method, NBTParameter[] parameters) {

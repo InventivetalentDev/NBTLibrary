@@ -14,10 +14,11 @@ import java.util.List;
 
 import static org.inventivetalent.nbt.TagID.TAG_END;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class ListTag<V extends NBTTag> extends NBTTag<List<V>> implements Iterable<V> {
 
-	private       int     tagType;
 	private final List<V> value;
+	private int tagType;
 
 	public ListTag() {
 		super("");
@@ -74,17 +75,23 @@ public class ListTag<V extends NBTTag> extends NBTTag<List<V>> implements Iterab
 	}
 
 	public void add(V tag) {
-		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type (List: " + getTagType() + ", Tag: " + tag.getTypeId() + ")"); }
+		if (tag.getTypeId() != getTagType()) {
+			throw new IllegalArgumentException("Invalid Tag type (List: " + getTagType() + ", Tag: " + tag.getTypeId() + ")");
+		}
 		value.add(tag);
 	}
 
 	public void add(int index, V tag) {
-		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type (List: " + getTagType() + ", Tag: " + tag.getTypeId() + ")"); }
+		if (tag.getTypeId() != getTagType()) {
+			throw new IllegalArgumentException("Invalid Tag type (List: " + getTagType() + ", Tag: " + tag.getTypeId() + ")");
+		}
 		value.add(index, tag);
 	}
 
 	public void set(int index, V tag) {
-		if (tag.getTypeId() != getTagType()) { throw new IllegalArgumentException("Invalid Tag type (List: " + getTagType() + ", Tag: " + tag.getTypeId() + ")"); }
+		if (tag.getTypeId() != getTagType()) {
+			throw new IllegalArgumentException("Invalid Tag type (List: " + getTagType() + ", Tag: " + tag.getTypeId() + ")");
+		}
 		value.set(index, tag);
 	}
 
@@ -102,6 +109,7 @@ public class ListTag<V extends NBTTag> extends NBTTag<List<V>> implements Iterab
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public void read(NBTInputStream nbtIn, DataInputStream in, int depth) throws IOException {
 		int type = in.readByte();
 		int length = in.readInt();
@@ -145,6 +153,7 @@ public class ListTag<V extends NBTTag> extends NBTTag<List<V>> implements Iterab
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public ListTag fromNMS(Object nms) throws ReflectiveOperationException {
 		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
 
@@ -159,13 +168,16 @@ public class ListTag<V extends NBTTag> extends NBTTag<List<V>> implements Iterab
 
 		for (Object o : nmsList) {
 			NBTTag nbtTag = NBTTag.forType(typeId).newInstance();
-			if (nbtTag.getTypeId() == TagID.TAG_END) { continue; }
+			if (nbtTag.getTypeId() == TagID.TAG_END) {
+				continue;
+			}
 			add((V) nbtTag.fromNMS(o));
 		}
 		return this;
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Object toNMS() throws ReflectiveOperationException {
 		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
 
@@ -188,14 +200,16 @@ public class ListTag<V extends NBTTag> extends NBTTag<List<V>> implements Iterab
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) { return true; }
-		if (o == null || getClass() != o.getClass()) { return false; }
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		ListTag listTag = (ListTag) o;
 
-		if (tagType != listTag.tagType) { return false; }
-		return value != null ? value.equals(listTag.value) : listTag.value == null;
-
+		return tagType == listTag.tagType && (value != null ? value.equals(listTag.value) : listTag.value == null);
 	}
 
 	@Override

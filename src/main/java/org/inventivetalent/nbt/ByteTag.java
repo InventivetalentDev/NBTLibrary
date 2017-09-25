@@ -8,9 +8,10 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class ByteTag extends NumberTag<Byte> {
 
-	private  byte value;
+	private byte value;
 
 	public ByteTag() {
 		this((byte) 0);
@@ -72,8 +73,12 @@ public class ByteTag extends NumberTag<Byte> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) { return true; }
-		if (o == null || getClass() != o.getClass()) { return false; }
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		ByteTag byteTag = (ByteTag) o;
 

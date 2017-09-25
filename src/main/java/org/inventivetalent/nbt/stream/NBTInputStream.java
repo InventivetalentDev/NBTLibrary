@@ -11,6 +11,7 @@ import java.util.zip.ZipException;
 
 import static org.inventivetalent.nbt.TagID.TAG_END;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class NBTInputStream implements AutoCloseable {
 
 	public static final Charset UTF_8 = Charset.forName("UTF-8");
