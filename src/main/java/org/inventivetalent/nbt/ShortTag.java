@@ -8,6 +8,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class ShortTag extends NumberTag<Short> {
 
 	private short value;
@@ -72,8 +73,12 @@ public class ShortTag extends NumberTag<Short> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) { return true; }
-		if (o == null || getClass() != o.getClass()) { return false; }
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		ShortTag shortTag = (ShortTag) o;
 

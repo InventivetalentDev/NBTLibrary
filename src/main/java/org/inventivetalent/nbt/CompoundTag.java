@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable<Map.Entry<String, NBTTag>> {
 
 	private final Map<String, NBTTag> value;
@@ -105,15 +106,21 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 
 	public String getString(String name) {
 		NBTTag tag = get(name);
-		if (tag == null) { return null; }
+		if (tag == null) {
+			return null;
+		}
 		Object value = tag.getValue();
-		if (value == null) { return null; }
+		if (value == null) {
+			return null;
+		}
 		return value.toString();
 	}
 
 	public Number getNumber(String name) {
 		NBTTag tag = get(name);
-		if (tag == null) { return null; }
+		if (tag == null) {
+			return null;
+		}
 		if (tag instanceof NumberTag) {
 			return ((NumberTag) tag).getValue();
 		}
@@ -122,16 +129,14 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 
 	public boolean getBoolean(String name) {
 		NBTTag tag = get(name);
-		if (tag == null) { return false; }
-		if (tag instanceof ByteTag) {
-			return ((ByteTag) tag).getValue() == 1;
-		}
-		return false;
+		return tag != null && tag instanceof ByteTag && ((ByteTag) tag).getValue() == 1;
 	}
 
 	public CompoundTag getCompound(String name) {
 		NBTTag tag = get(name);
-		if (tag == null) { return null; }
+		if (tag == null) {
+			return null;
+		}
 		if (tag instanceof CompoundTag) {
 			return (CompoundTag) tag;
 		}
@@ -149,13 +154,16 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 
 	public ListTag getList(String name) {
 		NBTTag tag = get(name);
-		if (tag == null) { return null; }
+		if (tag == null) {
+			return null;
+		}
 		if (tag instanceof ListTag) {
 			return (ListTag) tag;
 		}
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <V extends NBTTag> ListTag<V> getList(String name, Class<V> type) {
 		ListTag list = getList(name);
 		if (list.getTagType() != TagID.forClass(type)) {
@@ -175,7 +183,9 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 
 	public <T extends Enum<T>> T getEnum(String name, Class<T> clazz) {
 		String string = getString(name);
-		if (string == null) { return null; }
+		if (string == null) {
+			return null;
+		}
 		return Enum.valueOf(clazz, string);
 	}
 
@@ -228,6 +238,7 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public CompoundTag fromNMS(Object nms) throws ReflectiveOperationException {
 		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
 		Class<?> nbtBaseClass = NMS_CLASS_RESOLVER.resolve("NBTBase");
@@ -237,13 +248,16 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 
 		for (Map.Entry<String, Object> nmsEntry : nmsMap.entrySet()) {
 			byte typeId = (byte) nbtBaseClass.getMethod("getTypeId").invoke(nmsEntry.getValue());
-			if (typeId == TagID.TAG_END) { continue; }
+			if (typeId == TagID.TAG_END) {
+				continue;
+			}
 			set(nmsEntry.getKey(), NBTTag.forType(typeId).getConstructor(String.class).newInstance(nmsEntry.getKey()).fromNMS(nmsEntry.getValue()));
 		}
 		return this;
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public Object toNMS() throws ReflectiveOperationException {
 		Class<?> clazz = NMS_CLASS_RESOLVER.resolve(getNMSClass());
 		Field field = clazz.getDeclaredField("map");
@@ -259,8 +273,12 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) { return true; }
-		if (o == null || getClass() != o.getClass()) { return false; }
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		CompoundTag that = (CompoundTag) o;
 

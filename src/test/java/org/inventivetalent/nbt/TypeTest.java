@@ -1,6 +1,5 @@
 package org.inventivetalent.nbt;
 
-import org.inventivetalent.nbt.*;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

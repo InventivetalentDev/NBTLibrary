@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class IntArrayTag extends ArrayTag<int[], Integer> {
 
 	private int[] value;
@@ -72,8 +73,8 @@ public class IntArrayTag extends ArrayTag<int[], Integer> {
 	@Override
 	public void write(NBTOutputStream nbtOut, DataOutputStream out) throws IOException {
 		out.writeInt(value.length);
-		for (int i = 0; i < value.length; i++) {
-			out.writeInt(value[i]);
+		for (int aValue : value) {
+			out.writeInt(aValue);
 		}
 	}
 
@@ -104,8 +105,12 @@ public class IntArrayTag extends ArrayTag<int[], Integer> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) { return true; }
-		if (o == null || getClass() != o.getClass()) { return false; }
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		IntArrayTag integers = (IntArrayTag) o;
 

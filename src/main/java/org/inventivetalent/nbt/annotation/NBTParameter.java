@@ -5,6 +5,7 @@ import org.inventivetalent.nbt.NBTTag;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class NBTParameter extends NBTMember {
 
 	protected final Parameter parameter;

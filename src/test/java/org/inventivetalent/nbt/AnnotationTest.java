@@ -8,19 +8,19 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class AnnotationTest {
 
 	private final AnnotatedNBTHandler nbtHandler = new AnnotatedNBTHandler(this);
 
 	@NBT("name")
 	public String helloWorldName;
-	boolean helloWorldNameCalled;
-
 	@NBT({
-				 "nested compound test",
-				 "egg",
-				 "name" })
+			"nested compound test",
+			"egg",
+			"name"})
 	public String nestedEggName;
+	boolean helloWorldNameCalled;
 	boolean nestedEggCalled;
 	boolean nestedHamCalled;
 	boolean listCalled;
@@ -32,8 +32,8 @@ public class AnnotationTest {
 	}
 
 	@NBT({
-				 "nested compound test",
-				 "egg" })
+			"nested compound test",
+			"egg"})
 	public void nestedEgg(@NBT("name") String name, @NBT("value") float value) {
 		nestedEggCalled = true;
 		assertEquals("Eggbert", name);
@@ -41,8 +41,8 @@ public class AnnotationTest {
 	}
 
 	@NBT({
-				 "nested compound test",
-				 "ham" })
+			"nested compound test",
+			"ham"})
 	public void nestedHam(@NBT("name") String name, @NBT("value") float value) {
 		nestedHamCalled = true;
 		assertEquals("Hampus", name);

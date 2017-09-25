@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class NBTInfo implements Comparable<NBTInfo> {
 
-	protected final String[]    key;
-	protected final int         type;
-	protected final boolean     read;
-	protected final boolean     write;
+	protected final String[] key;
+	protected final int type;
+	protected final boolean read;
+	protected final boolean write;
 	protected final NBTPriority priority;
 
 	@Override

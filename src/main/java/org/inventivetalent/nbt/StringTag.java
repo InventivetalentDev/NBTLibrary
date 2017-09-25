@@ -8,6 +8,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class StringTag extends NBTTag<String> {
 
 	private String value;
@@ -107,8 +108,12 @@ public class StringTag extends NBTTag<String> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) { return true; }
-		if (o == null || getClass() != o.getClass()) { return false; }
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		StringTag stringTag = (StringTag) o;
 

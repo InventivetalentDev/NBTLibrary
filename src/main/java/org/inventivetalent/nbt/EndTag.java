@@ -9,6 +9,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class EndTag extends NBTTag<Void> {
 
 	public EndTag() {

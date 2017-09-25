@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class ByteArrayTag extends ArrayTag<byte[], Byte> {
 
 	private byte[] value;
@@ -100,8 +101,12 @@ public class ByteArrayTag extends ArrayTag<byte[], Byte> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) { return true; }
-		if (o == null || getClass() != o.getClass()) { return false; }
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		ByteArrayTag bytes = (ByteArrayTag) o;
 

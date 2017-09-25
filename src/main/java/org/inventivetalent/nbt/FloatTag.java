@@ -8,6 +8,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class FloatTag extends NumberTag<Float> {
 
 	private float value;
@@ -72,8 +73,12 @@ public class FloatTag extends NumberTag<Float> {
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) { return true; }
-		if (o == null || getClass() != o.getClass()) { return false; }
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
 
 		FloatTag floatTag = (FloatTag) o;
 

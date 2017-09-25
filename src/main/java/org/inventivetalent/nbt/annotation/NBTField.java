@@ -4,6 +4,7 @@ import org.inventivetalent.nbt.NBTTag;
 
 import java.lang.reflect.Field;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class NBTField extends NBTMember {
 
 	private final Field field;
@@ -23,6 +24,7 @@ public class NBTField extends NBTMember {
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public NBTTag write(NBTTag tag) {
 		try {
 			Object value = toNbtValue(field.get(this.obj), field.getType());
@@ -43,6 +45,7 @@ public class NBTField extends NBTMember {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public NBTTag getNBT() {
 		try {
 			Object value = field.get(this.obj);
