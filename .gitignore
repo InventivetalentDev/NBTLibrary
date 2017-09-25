@@ -1,3 +1,5 @@
+*.nbt
+
 ### Java files ###
 *.class
 MANIFEST.MF
