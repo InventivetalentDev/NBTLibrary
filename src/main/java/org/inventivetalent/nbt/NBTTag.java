@@ -63,6 +63,8 @@ public abstract class NBTTag<V> {
 				return ShortTag.class;
 			case TAG_STRING:
 				return StringTag.class;
+			case TAG_LONG_ARRAY:
+				return LongArrayTag.class;
 			default:
 				throw new IllegalArgumentException("Invalid NBTTag type " + type);
 		}

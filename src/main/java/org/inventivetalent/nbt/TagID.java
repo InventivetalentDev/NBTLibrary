@@ -17,6 +17,7 @@ public class TagID {
 	public static final int TAG_LIST       = 9;
 	public static final int TAG_COMPOUND   = 10;
 	public static final int TAG_INT_ARRAY  = 11;
+	public static final int TAG_LONG_ARRAY = 12;
 
 	public static int forClass(Class<? extends NBTTag> clazz) {
 		return forName(clazz.getSimpleName());
@@ -49,6 +50,9 @@ public class TagID {
 		}
 		if (int[].class.isAssignableFrom(clazz) || Integer[].class.isAssignableFrom(clazz)) {
 			return TAG_INT_ARRAY;
+		}
+		if (long[].class.isAssignableFrom(clazz) || Long[].class.isAssignableFrom(clazz)) {
+			return TAG_LONG_ARRAY;
 		}
 		if (List.class.isAssignableFrom(clazz)) {
 			return TAG_LIST;
@@ -97,6 +101,9 @@ public class TagID {
 			case "StringTag":
 			case "TAG_String":
 				return TAG_STRING;
+			case "LongArrayTag":
+			case "Tag_Long_Array":
+				return TAG_LONG_ARRAY;
 			default:
 				throw new IllegalArgumentException("Invalid NBTTag name: " + name);
 		}

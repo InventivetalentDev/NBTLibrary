@@ -91,6 +91,10 @@ public class CompoundTag extends NBTTag<Map<String, NBTTag>> implements Iterable
 		set(name, new IntArrayTag(name, i));
 	}
 
+	public void set(String name, long[] l) {
+		set(name, new LongArrayTag(name, l));
+	}
+
 	public void set(String name, boolean b) {
 		set(name, (byte) (b ? 1 : 0));
 	}
